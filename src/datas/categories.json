@@ -1,3 +1,37 @@
-{
-  
-}
+[
+  {
+    "id": 1,
+    "name": "Open Source",
+    "color": "#2196F3",
+    "createdAt": "2020-05-28T12:59:04.616Z",
+    "updatedAt": "2020-05-28T12:59:04.616Z"
+  },
+  {
+    "id": 2,
+    "name": "Design UX/UI",
+    "color": "#2196F3",
+    "createdAt": "2020-05-28T15:59:04.616Z",
+    "updatedAt": "2020-05-28T15:59:04.616Z"
+  },
+  {
+    "id": 3,
+    "name": "Testing",
+    "color": "#4CAF50",
+    "createdAt": "2020-05-28T16:59:04.616Z",
+    "updatedAt": "2020-05-28T16:59:04.616Z"
+  },
+  {
+    "id": 4,
+    "name": "Javascript",
+    "color": "#FF5722",
+    "createdAt": "2020-05-28T18:59:04.616Z",
+    "updatedAt": "2020-05-28T18:59:04.616Z"
+  },
+  {
+    "id": 5,
+    "name": "DevOps",
+    "color": "#673AB7",
+    "createdAt": "2020-05-28T20:59:04.616Z",
+    "updatedAt": "2020-05-28T20:59:04.616Z"
+  }
+]
