@@ -1,19 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Routes from './config/router'
-import { ThemeProvider } from 'styled-components'
-import { lightTheme, darkTheme } from './config/theme'
+import { Provider } from 'react-redux'
+
+import { store } from './config/store'
 
 function App() {
-  const [theme, setTheme] = useState('light')
-  const themeToggler = () => {
-    theme === 'light' ? setTheme('dark') : setTheme('light')
-  }
-
   return (
-    <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
-      <button onClick={themeToggler}>Switch Theme</button>
+    <Provider store={store}>
       <Routes></Routes>
-    </ThemeProvider>
+    </Provider>
   )
 }
 
