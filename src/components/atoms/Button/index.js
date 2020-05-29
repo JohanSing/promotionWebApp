@@ -28,9 +28,9 @@ const Button = ({
 };
 const ButtonComponent = styled.button`
   background-color: ${props =>
-    !props.IsInvert ? `${props.fillingColor}` : 'white'};
+    props.IsInvert ? 'white' : props.fillingColor };
   border: none;
-  color: ${props => props.textColor};
+  color: ${props => props.IsInvert ? props.textHoverColor : props.textColor};
   padding: 16px 32px;
   text-align: center;
   text-decoration: none;
@@ -42,9 +42,9 @@ const ButtonComponent = styled.button`
   border: 2px solid ${props => props.borderColor};
   &:hover {
     background-color: ${props =>
-      props.IsInvert ? 'white' : props.fillingColor};
+      props.IsInvert ? props.fillingColor: 'white'};
     color: ${props =>
-      props.IsInvert ? props.textHoverColor : props.textColor};
+      props.IsInvert ? props.textColor : props.textHoverColor};
   }
 `;
 const ButtonContainer = styled.div``;
