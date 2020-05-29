@@ -1,13 +1,15 @@
-import React from 'react';
-import Routes from './config/router';
-import { ThemeProvider } from 'styled-components';
-import { theme } from './config/theme';
+import React from 'react'
+import Routes from './config/router'
+import { Provider } from 'react-redux'
+
+import { store } from './config/store'
+
 function App() {
   return (
-    <ThemeProvider theme={theme}>
+    <Provider store={store}>
       <Routes></Routes>
-    </ThemeProvider>
-  );
+    </Provider>
+  )
 }
 
-export default App;
+export default App

@@ -1,14 +1,13 @@
-import React from 'react';
+import React from 'react'
 import {
   Route,
   BrowserRouter as Router,
   Redirect,
   Switch
-} from 'react-router-dom';
+} from 'react-router-dom'
 
-import Login from '../components/pages/Login';
-import Home from '../components/pages/Home';
-
+import Login from '../components/pages/Login'
+import Home from '../components/pages/Home'
 
 const Routes = () => {
   return (
@@ -19,7 +18,7 @@ const Routes = () => {
         <Redirect to='/'></Redirect>
       </Switch>
     </Router>
-  );
-};
+  )
+}
 
-export default Routes;
+export default Routes
