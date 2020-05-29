@@ -2,7 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Navbar = props => {
-  return <NavbarContainer>{props.children}</NavbarContainer>
+  return (
+    <NavbarContainer colorBackground={props.colorBackground}>
+      {props.children}
+    </NavbarContainer>
+  )
 }
 
 const NavbarContainer = styled.div`
@@ -10,7 +14,7 @@ const NavbarContainer = styled.div`
   flex-direction: column;
   align-items: flex-end;
   list-style: none;
-  background-color: #333;
+  background-color: ${props => props.colorBackground};
   justify-content: space-between;
   height: 100%;
   max-height: 116em;

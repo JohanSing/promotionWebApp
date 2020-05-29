@@ -28,6 +28,7 @@ const colors = {
 }
 
 const lightTheme = {
+  key: 'light',
   colors: {
     backgroundMain: colors.beige,
     btnBackgroundMain: colors.beige,
@@ -44,6 +45,7 @@ const lightTheme = {
 }
 
 const darkTheme = {
+  key: 'dark',
   colors: {
     backgroundMain: colors.darkBlue,
     btnBackgroundMain: colors.darkBlue,

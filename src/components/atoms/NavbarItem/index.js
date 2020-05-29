@@ -4,7 +4,12 @@ import PropTypes from 'prop-types'
 
 const NavbarMenuItem = ({ link, name, isActive = false, ...props }) => {
   return (
-    <NavbarItem isActive={isActive} href={link}>
+    <NavbarItem
+      colorFont={props.colorFont}
+      colorBackground={props.colorBackground}
+      isActive={isActive}
+      href={link}
+    >
       {name}
     </NavbarItem>
   )
@@ -12,7 +17,7 @@ const NavbarMenuItem = ({ link, name, isActive = false, ...props }) => {
 
 const NavbarItem = styled.a`
   align-self: center;
-  color: #f2f2f2;
+  color: ${props => props.colorFont};
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;

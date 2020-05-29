@@ -1,14 +1,16 @@
-import React, { useState, useContext } from 'react'
-import styled, { ThemeContext } from 'styled-components'
+import React, { useState } from 'react'
+import Proptypes from 'prop-types'
+import styled from 'styled-components'
+
+import { FaBars, FaTimes } from 'react-icons/fa'
+
 import Navbar from '../../atoms/Navbar'
 import NavbarItem from '../../atoms/NavbarItem'
-import { FaBars, FaTimes } from 'react-icons/fa'
 import Toggle from '../../atoms/Toggle'
 
-const FullNavbar = props => {
+const FullNavbar = ({ theme }) => {
   const [isNavbarActive, setisNavbarActive] = useState(false)
   const [icon, setIcon] = useState(FaBars)
-  const theme = useContext(ThemeContext)
 
   function activeNavbar() {
     if (isNavbarActive) {
@@ -21,28 +23,42 @@ const FullNavbar = props => {
   }
 
   return (
-    <Navbar>
-      <NavbarItemHome colorBackground={theme.colors.lightPrimary} href='/'>
+    <Navbar colorBackground={theme.colors.backgroundMain}>
+      <NavbarItemHome
+        colorBackground={theme.colors.backgroundMain}
+        colorFont={theme.colors.fontMain}
+        href='/'
+      >
         Projay
       </NavbarItemHome>
-      <NavbarItemIcon href='#bars' onClick={activeNavbar}>
+      <NavbarItemIcon
+        colorFont={theme.colors.fontMain}
+        href='#bars'
+        onClick={activeNavbar}
+      >
         {icon}
       </NavbarItemIcon>
       <NavbarItemIconToggle>
-        <Toggle></Toggle>
+        <Toggle color={theme.colors.btnBackgroundPrimaryHover}></Toggle>
       </NavbarItemIconToggle>
       <NavbarItem
         name={'Uploader un Livre'}
         isActive={isNavbarActive}
         href='/books/upload'
+        colorBackground={theme.colors.backgroundMain}
+        colorFont={theme.colors.fontMain}
       ></NavbarItem>
     </Navbar>
   )
 }
 
+FullNavbar.propTypes = {
+  theme: Proptypes.object
+}
+
 const NavbarItemHome = styled.a`
   align-self: flex-start;
-  color: #f2f2f2;
+  color: ${props => props.colorFont};
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
@@ -53,14 +69,16 @@ const NavbarItemHome = styled.a`
 const NavbarItemIcon = styled.a`
   align-items: flex-end;
   position: absolute;
-  color: #f2f2f2;
+  color: ${props => props.colorFont};
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
   font-size: 17px;
 `
+
 const NavbarItemIconToggle = styled(NavbarItemIcon)`
   margin-bottom: 10em;
   margin-right: 3em;
 `
+
 export default FullNavbar

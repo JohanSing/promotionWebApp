@@ -1,15 +1,18 @@
-import React, { useContext } from 'react'
-import styled, { ThemeContext } from 'styled-components'
+import React from 'react'
+import { useDispatch } from 'react-redux'
+import styled from 'styled-components'
 import { FaMoon } from 'react-icons/fa'
 
-const Toggle = () => {
-  const theme = useContext(ThemeContext)
-  console.log(theme)
+import { switchTheme } from '../../../stores/actions/global'
+
+const Toggle = props => {
+  const dispatch = useDispatch()
+
   return (
     <div>
-      <FaBarsElement></FaBarsElement>
+      <FaMoonElement color={props.color}></FaMoonElement>
       <ToggleContainer>
-        <ToggleInput type='checkbox' />
+        <ToggleInput type='checkbox' onClick={() => dispatch(switchTheme())} />
         <ToggleSliderRound></ToggleSliderRound>
       </ToggleContainer>
     </div>
@@ -62,8 +65,9 @@ const ToggleInput = styled.input`
     transform: translateX(26px);
   }
 `
-const FaBarsElement = styled(FaMoon)`
+const FaMoonElement = styled(FaMoon)`
   position: absolute;
   margin-top: 0.5em;
+  color: ${props => props.color};
 `
 export default Toggle

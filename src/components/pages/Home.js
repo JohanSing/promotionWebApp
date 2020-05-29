@@ -1,11 +1,17 @@
-import React, { useContext } from 'react'
-import styled, { ThemeContext } from 'styled-components'
+import React from 'react'
+// import styled from 'styled-components'
+import { useSelector } from 'react-redux'
+
 import Navbar from '../molecules/FullNavbar'
 
 const Home = () => {
-  const theme = useContext(ThemeContext)
+  const themeState = useSelector(state => state.global.theme)
 
-  return <Navbar></Navbar>
+  return (
+    <div>
+      <Navbar theme={themeState}></Navbar>
+    </div>
+  )
 }
 
 export default Home

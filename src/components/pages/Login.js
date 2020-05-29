@@ -1,12 +1,13 @@
-import React, { useContext } from 'react'
-import styled, { ThemeContext } from 'styled-components'
+import React from 'react'
+import { useSelector } from 'react-redux'
+import styled from 'styled-components'
 
 const Login = () => {
-  const theme = useContext(ThemeContext)
+  const themeState = useSelector(state => state.global.theme)
 
   return (
     <div>
-      <Button theme={theme}> Hello </Button>
+      <Button theme={themeState}> Hello </Button>
     </div>
   )
 }
