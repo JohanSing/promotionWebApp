@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 
 import Navbar from '../molecules/FullNavbar'
 
-const Home = () => {
+const Header = () => {
   const themeState = useSelector(state => state.global.theme)
 
   return (
@@ -14,4 +14,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Header

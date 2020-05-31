@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom'
 
 import Login from '../components/pages/Login'
-import Home from '../components/pages/Home'
+import Home from '../components/Home/Home'
 
 const Routes = () => {
   return (
