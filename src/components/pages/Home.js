@@ -1,15 +1,11 @@
 import React from 'react'
 // import styled from 'styled-components'
-import { useSelector } from 'react-redux'
-
-import Navbar from '../molecules/FullNavbar'
+import Project from './Project'
 
 const Home = () => {
-  const themeState = useSelector(state => state.global.theme)
-
   return (
     <div>
-      <Navbar theme={themeState}></Navbar>
+      <Project />
     </div>
   )
 }
