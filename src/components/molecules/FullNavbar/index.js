@@ -31,13 +31,6 @@ const FullNavbar = ({ theme }) => {
       >
         Projects
       </NavbarItemHome>
-      <NavbarItemHome
-        colorBackground={theme.colors.backgroundMain}
-        colorFont={theme.colors.fontMain}
-        href='/posts'
-      >
-        Posts
-      </NavbarItemHome>
       <NavbarItemIcon
         colorFont={theme.colors.fontMain}
         href='#bars'
