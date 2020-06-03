@@ -29,7 +29,7 @@ const FullNavbar = ({ theme }) => {
         colorFont={theme.colors.fontMain}
         href='/'
       >
-        Projay
+        Projects
       </NavbarItemHome>
       <NavbarItemIcon
         colorFont={theme.colors.fontMain}
