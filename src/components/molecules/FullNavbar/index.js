@@ -1,84 +1,141 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import Proptypes from 'prop-types'
 import styled from 'styled-components'
 
-import { FaBars, FaTimes } from 'react-icons/fa'
+import { signInWithGithub } from '../../../stores/actions/auth'
+import { switchTheme } from '../../../stores/actions/global'
+
+import { FaBars, FaTimes, FaGithub } from 'react-icons/fa'
 
 import Navbar from '../../atoms/Navbar'
-import NavbarItem from '../../atoms/NavbarItem'
+import NavbarItemLink from '../../atoms/NavbarItem/NavbarItemLink'
+import NavbarItemButton from '../../atoms/NavbarItem/NavbarItemButton'
+import NavbarItemIcon from '../../atoms/NavbarItem/NavbarItemIcon'
 import Toggle from '../../atoms/Toggle'
 
 const FullNavbar = ({ theme }) => {
-  const [isNavbarActive, setisNavbarActive] = useState(false)
+  const dispatch = useDispatch()
+  const [isNavbarActive, setIsNavbarActive] = useState(false)
   const [icon, setIcon] = useState(FaBars)
+
+  const toggleTheme = () => {
+    dispatch(switchTheme())
+  }
+
+  const githubLogin = () => {
+    dispatch(signInWithGithub())
+  }
 
   function activeNavbar() {
     if (isNavbarActive) {
-      setisNavbarActive(false)
+      setIsNavbarActive(false)
       setIcon(FaBars)
     } else {
-      setisNavbarActive(true)
+      setIsNavbarActive(true)
       setIcon(FaTimes)
     }
   }
 
   return (
     <Navbar colorBackground={theme.colors.backgroundMain}>
-      <NavbarItemHome
-        colorBackground={theme.colors.backgroundMain}
-        colorFont={theme.colors.fontMain}
-        href='/'
-      >
-        Projay
-      </NavbarItemHome>
-      <NavbarItemIcon
-        colorFont={theme.colors.fontMain}
-        href='#bars'
-        onClick={activeNavbar}
-      >
-        {icon}
-      </NavbarItemIcon>
-      <NavbarItemIconToggle>
-        <Toggle color={theme.colors.btnBackgroundPrimaryHover}></Toggle>
-      </NavbarItemIconToggle>
-      <NavbarItem
-        name={'Uploader un Livre'}
+      <TopBar>
+        <NavbarItemHome colorFont={theme.colors.fontMain} href='/'>
+          Promotion
+        </NavbarItemHome>
+        <TopBarLink>
+          <NavbarItemIcon>
+            <Toggle
+              action={toggleTheme}
+              color={theme.colors.btnBackgroundPrimaryHover}
+            ></Toggle>
+          </NavbarItemIcon>
+          <NavbarItemButton
+            colorFont={theme.colors.btnFontPrimary}
+            colorBorder={theme.colors.btnBorderPrimary}
+            colorBackground={theme.colors.btnBackgroundMain}
+            margin={'0 20px 0 0'}
+            action={activeNavbar}
+          >
+            {icon}
+          </NavbarItemButton>
+        </TopBarLink>
+      </TopBar>
+      <TopBarMenu
         isActive={isNavbarActive}
-        href='/books/upload'
         colorBackground={theme.colors.backgroundMain}
-        colorFont={theme.colors.fontMain}
-      ></NavbarItem>
+      >
+        <NavbarItemLink
+          name='Categories'
+          isActive={true}
+          link='/'
+          colorFont={theme.colors.fontMain}
+        />
+        <NavbarItemLink
+          name='New project'
+          isActive={true}
+          link='/'
+          colorFont={theme.colors.fontMain}
+        />
+        <NavbarItemLink
+          name='New post'
+          isActive={true}
+          link='/'
+          colorFont={theme.colors.fontMain}
+        />
+        <NavbarItemButton
+          colorFont={theme.colors.btnFontPrimary}
+          colorBorder={theme.colors.btnBorderPrimary}
+          colorBackground={theme.colors.btnBackgroundMain}
+          margin={'14px 35px'}
+          action={githubLogin}
+        >
+          <FaGithub colorfont={theme.colors.fontMain} />
+          Login
+        </NavbarItemButton>
+      </TopBarMenu>
     </Navbar>
   )
 }
 
 FullNavbar.propTypes = {
-  theme: Proptypes.object
+  theme: Proptypes.object,
+  authUser: Proptypes.object
 }
 
+const TopBar = styled.div`
+  max-width: 100%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  position: relative;
+`
+
 const NavbarItemHome = styled.a`
-  align-self: flex-start;
-  color: ${props => props.colorFont};
-  text-align: center;
-  padding: 14px 16px;
+  display: flex;
+  margin-left: 2em;
   text-decoration: none;
-  font-size: 17px;
+  color: ${props => props.colorFont};
+`
+
+const TopBarLink = styled.div`
+  height: 4em;
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+`
+
+const TopBarMenu = styled.div`
+  max-width: 100%;
+  margin: auto;
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
   background-color: ${props => props.colorBackground};
-`
-
-const NavbarItemIcon = styled.a`
-  align-items: flex-end;
-  position: absolute;
-  color: ${props => props.colorFont};
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-`
-
-const NavbarItemIconToggle = styled(NavbarItemIcon)`
-  margin-bottom: 10em;
-  margin-right: 3em;
+  display: ${props => (props.isActive ? 'block' : 'none')};
 `
 
 export default FullNavbar
