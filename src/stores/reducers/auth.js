@@ -1,13 +1,17 @@
 import { GET_AUTH } from '../actions/auth'
 
 const initialState = {
-  authUser: {}
+  authUser: {
+    user: {
+      photoURL: '',
+      displayName: ''
+    }
+  }
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_AUTH:
-      console.log('Hello')
       return {
         ...state,
         authUser: action.payload

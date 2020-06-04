@@ -14,8 +14,6 @@ const Home = () => {
     dispatch(retrieveAuth())
   }, [authState])
 
-  console.log('Hello 2')
-
   return (
     <div>
       <Navbar theme={themeState} authUser={authState}></Navbar>

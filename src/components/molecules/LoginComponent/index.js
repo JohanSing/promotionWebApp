@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import Proptypes from 'prop-types'
-
 import { FaGithub } from 'react-icons/fa'
 
 import AvatarComponent from '../FullAvatar'
@@ -8,15 +7,12 @@ import NavbarItemButton from '../../atoms/NavbarItem/NavbarItemButton'
 
 const LoginComponent = ({ action, theme, authUser }) => {
   const [userInfo, setUserInfo] = useState({ avatarURL: null, userName: null })
-
   useEffect(() => {
     setUserInfo({
       avatarURL: authUser.user.photoURL,
       userName: authUser.user.displayName
     })
   }, [authUser])
-
-  console.log('Hello 3')
 
   if (authUser !== undefined) {
     return (
