@@ -7,6 +7,7 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_AUTH:
+      console.log('Hello')
       return {
         ...state,
         authUser: action.payload
