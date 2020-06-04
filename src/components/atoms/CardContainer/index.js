@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 const Container = styled.div`
   border: 0.2em solid ${props => props.color};
-  max-width: 40em;
+  max-width: 22em;
   height: auto;
   padding: 1em;
   border-radius: 0.6em;

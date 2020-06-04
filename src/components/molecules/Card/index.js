@@ -30,7 +30,8 @@ const Card = ({
   ...props
 }) => {
   var LikeComponent = null,
-    DateComponent = null
+    DateComponent = null,
+    CategoryComponent = null
   if (!IsNullOrEmpty(numberLike)) {
     LikeComponent = (
       <IconTextContainer color={color}>
@@ -39,6 +40,7 @@ const Card = ({
       </IconTextContainer>
     )
   }
+  console.log(date)
   if (!IsNullOrEmpty(date)) {
     DateComponent = (
       <IconTextContainer color={color}>
@@ -47,15 +49,18 @@ const Card = ({
       </IconTextContainer>
     )
   }
+  if (!IsNullOrEmpty(category)) {
+    CategoryComponent = (
+      <IconTextContainer color={color}>
+        <FaRocket />
+        {category}
+      </IconTextContainer>
+    )
+  }
   return (
     <CardContainer color={color}>
       <CardTitle>{title}</CardTitle>
-      <CardCategory>
-        <IconTextContainer color={color}>
-          <FaRocket />
-          {category}
-        </IconTextContainer>
-      </CardCategory>
+      <CardCategory>{CategoryComponent}</CardCategory>
       <CardDescription text={description} />
       {DateComponent}
       <SectionContainer>
