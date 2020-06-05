@@ -4,6 +4,9 @@
     "categories": "Categories",
     "newPost": "New post",
     "newProject": "New project",
+    "searchInput":"Enter a key to begin your search",
+    "cardLink":"Read",
+    "search":"Search",
     "langEn": "English",
     "langFr": "French"
   }

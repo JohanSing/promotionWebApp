@@ -6,7 +6,6 @@ const Wrapper = styled.a`
   align-self: flex-end;
   text-decoration: none;
   color: black;
-  @import url('https://fonts.googleapis.com/css2?family=Francois+One&family=Lato:wght@400;700;900&display=swap%27');
   font-family: 'Francois One';
 `
 
