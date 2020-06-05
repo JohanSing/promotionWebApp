@@ -67,7 +67,7 @@ const ResultSearchContainer = styled.div`
     grid-template-columns: repeat(2, 30em);
   }
   @media ${props => props.largeScreen} {
-    grid-template-columns: repeat(4, 26em);
+    grid-template-columns: repeat(3, 26em);
   }
   @media ${props => props.FourKScreen} {
     grid-template-columns: repeat(7, 26em);
