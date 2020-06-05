@@ -26,7 +26,7 @@ const SectionStatsContainer = styled.div`
 
   @media ${props => props.mediumScreen} {
     grid-gap: 18em;
-    grid-template-columns: repeat(3, 30em);
+    grid-template-columns: repeat(3, 15em);
   }
 `
 const CategoryContainer = styled.div`
@@ -35,6 +35,7 @@ const CategoryContainer = styled.div`
   display: flex;
   flex-direction: column;
 `
+
 const templateForm = {
   title: '',
   description: '',
@@ -46,6 +47,7 @@ const templateForm = {
   nbContributors: null,
   categoryId: null
 }
+
 const CreateProject = () => {
   const categories = useSelector(state => state.createPage.categories)
   const themeState = useSelector(state => state.global.theme)
@@ -54,56 +56,85 @@ const CreateProject = () => {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getCategories())
-  }, [categories, dispatch])
-
+  }, [])
+  const registerProject = () => {
+    console.log(form)
+  }
   return (
     <Template>
       <CreateProjectContainer>
         <Title>Création d'un projet</Title>
         <Input
-          inputColor={themeState.colors.btnFontPrimary}
+          inputColor={themeState.colors.btnBorderPrimary}
           type='text'
           labelName={t('createPage.form.title')}
+          onChange={event => setForm({ ...form, title: event.target.value })}
         />
         <Textarea
-          inputColor={themeState.colors.btnFontPrimary}
+          inputColor={themeState.colors.btnBorderPrimary}
           name='author-surnname'
           id='description'
           inputName={t('createPage.form.description')}
+          onChange={event =>
+            setForm({ ...form, description: event.target.value })
+          }
         ></Textarea>
         <Input
-          inputColor={themeState.colors.btnFontPrimary}
+          inputColor={themeState.colors.btnBorderPrimary}
+          type='text'
+          labelName={t('createPage.form.licence')}
+          onChange={event => setForm({ ...form, license: event.target.value })}
+        />
+        <Input
+          inputColor={themeState.colors.btnBorderPrimary}
           type='date'
           labelName={t('createPage.form.last_release')}
+          onChange={event =>
+            setForm({ ...form, lastRelease: event.target.value })
+          }
         />
         <SectionStatsContainer mediumScreen={themeState.sizes.tablet}>
           <Input
-            inputColor={themeState.colors.btnFontPrimary}
+            inputColor={themeState.colors.btnBorderPrimary}
             type='number'
             min='0'
-            value='0'
             labelName={t('createPage.form.nbIssue')}
+            onChange={event =>
+              setForm({ ...form, nbIssues: event.target.value })
+            }
           />
           <Input
-            inputColor={themeState.colors.btnFontPrimary}
+            inputColor={themeState.colors.btnBorderPrimary}
             type='number'
             min='0'
-            value='0'
             labelName={t('createPage.form.nbContributor')}
+            onChange={event =>
+              setForm({ ...form, nbContributors: event.target.value })
+            }
           />
           <Input
-            inputColor={themeState.colors.btnFontPrimary}
+            inputColor={themeState.colors.btnBorderPrimary}
             type='number'
             min='0'
-            value='0'
             labelName={t('createPage.form.nbRelease')}
+            onChange={event =>
+              setForm({ ...form, nbReleases: event.target.value })
+            }
           />
         </SectionStatsContainer>
         <CategoryContainer>
           <Select
             name={t('createPage.form.category')}
-            color={themeState.colors.backgroundMain}
+            color={themeState.colors.btnBorderPrimary}
             required
+            onClick={event => {
+              let select = event.target
+              console.log(select)
+              setForm({
+                ...form,
+                categoryId: select[select.selectedIndex].value
+              })
+            }}
           >
             <option value='' disabled selected></option>
             {categories.map((category, index) => {
@@ -118,17 +149,21 @@ const CreateProject = () => {
             nameOff={t('createPage.form.toggleOff')}
             nameOn={t('createPage.form.toggleOn')}
             inputName='checkbox'
-            color={themeState.colors.backgroundMain}
+            color={themeState.colors.btnBorderPrimary}
+            onClick={event => {
+              console.log(event.target.checked)
+              setForm({ ...form, isPrivate: event.target.checked })
+            }}
           />
         </CategoryContainer>
         <Button
           name='Créer votre projet'
-          borderColor={themeState.colors.backgroundMain}
-          textHoverColor={themeState.colors.backgroundMain}
-          fillingColor={themeState.colors.backgroundMain}
+          borderColor={themeState.colors.btnBorderPrimary}
+          textHoverColor={themeState.colors.btnBorderPrimary}
+          fillingColor={themeState.colors.btnBorderPrimary}
           textColor='white'
-          IsInvert={themeState.colors.backgroundMain}
-          onClick={() => console.log('test')}
+          IsInvert={themeState.colors.btnBorderPrimary}
+          onClick={registerProject}
         ></Button>
       </CreateProjectContainer>
     </Template>
