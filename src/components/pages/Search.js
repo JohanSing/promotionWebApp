@@ -17,7 +17,6 @@ const Search = () => {
       <SearchContainer>
         <div>
           <Input
-            placeholder='Entrez quelque chose pour commencer la rechercher'
             inputColor={themeState.colors.btnFontPrimary}
             type='text'
             labelName='Recherche'
