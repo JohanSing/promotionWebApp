@@ -6,15 +6,16 @@ import styled from 'styled-components'
 import { signInWithGithub } from '../../../stores/actions/auth'
 import { switchTheme } from '../../../stores/actions/global'
 
-import { FaBars, FaTimes, FaGithub } from 'react-icons/fa'
+import { FaBars, FaTimes } from 'react-icons/fa'
 
 import Navbar from '../../atoms/Navbar'
 import NavbarItemLink from '../../atoms/NavbarItem/NavbarItemLink'
 import NavbarItemButton from '../../atoms/NavbarItem/NavbarItemButton'
 import NavbarItemIcon from '../../atoms/NavbarItem/NavbarItemIcon'
 import Toggle from '../../atoms/Toggle'
+import LoginComponent from '../LoginComponent'
 
-const FullNavbar = ({ theme }) => {
+const FullNavbar = ({ theme, authUser }) => {
   const dispatch = useDispatch()
   const [isNavbarActive, setIsNavbarActive] = useState(false)
   const [icon, setIcon] = useState(FaBars)
@@ -83,16 +84,11 @@ const FullNavbar = ({ theme }) => {
           link='/'
           colorFont={theme.colors.fontMain}
         />
-        <NavbarItemButton
-          colorFont={theme.colors.btnFontPrimary}
-          colorBorder={theme.colors.btnBorderPrimary}
-          colorBackground={theme.colors.btnBackgroundMain}
-          margin={'14px 35px'}
+        <LoginComponent
           action={githubLogin}
-        >
-          <FaGithub colorfont={theme.colors.fontMain} />
-          Login
-        </NavbarItemButton>
+          theme={theme}
+          authUser={authUser}
+        />
       </TopBarMenu>
     </Navbar>
   )

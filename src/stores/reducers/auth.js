@@ -1,7 +1,12 @@
 import { GET_AUTH } from '../actions/auth'
 
 const initialState = {
-  authUser: {}
+  authUser: {
+    user: {
+      photoURL: '',
+      displayName: ''
+    }
+  }
 }
 
 export default (state = initialState, action) => {
