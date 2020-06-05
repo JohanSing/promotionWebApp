@@ -1,4 +1,5 @@
 import React from 'react'
+import Proptypes from 'prop-types'
 import styled from 'styled-components'
 
 const Navbar = props => {
@@ -9,15 +10,18 @@ const Navbar = props => {
   )
 }
 
+Navbar.propTypes = {
+  colorBackground: Proptypes.string
+}
+
 const NavbarContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  list-style: none;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  z-index: 101;
+  height: 4em;
   background-color: ${props => props.colorBackground};
-  justify-content: space-between;
-  height: 100%;
-  max-height: 116em;
 `
 
 export default Navbar
