@@ -1,29 +1,29 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import Proptypes from 'prop-types'
 import styled from 'styled-components'
 import { FaMoon } from 'react-icons/fa'
 
-import { switchTheme } from '../../../stores/actions/global'
-
-const Toggle = props => {
-  const dispatch = useDispatch()
-
+const Toggle = ({ action, color }) => {
   return (
-    <div>
-      <FaMoonElement color={props.color}></FaMoonElement>
-      <ToggleContainer>
-        <ToggleInput type='checkbox' onClick={() => dispatch(switchTheme())} />
-        <ToggleSliderRound></ToggleSliderRound>
-      </ToggleContainer>
-    </div>
+    <ToggleContainer>
+      <FaMoonElement color={color} />
+      <ToggleInput type='checkbox' onClick={() => action()} color={color} />
+      <ToggleSliderRound></ToggleSliderRound>
+    </ToggleContainer>
   )
+}
+
+Toggle.propTypes = {
+  color: Proptypes.string,
+  action: Proptypes.func
 }
 
 const ToggleContainer = styled.label`
   position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
+  display: flex;
+  flex-direction: row;
+  width: 50px;
+  height: 30px;
 `
 const ToggleSliderRound = styled.span`
   position: absolute;
@@ -39,8 +39,8 @@ const ToggleSliderRound = styled.span`
   &:before {
     position: absolute;
     content: '';
-    height: 26px;
-    width: 26px;
+    height: 22px;
+    width: 22px;
     left: 4px;
     bottom: 4px;
     background-color: white;
@@ -54,20 +54,22 @@ const ToggleInput = styled.input`
   width: 0;
   height: 0;
   &:checked + ${ToggleSliderRound} {
-    background-color: #2196f3;
+    background-color: ${props => props.color};
   }
   &:focus + ${ToggleSliderRound} {
-    box-shadow: 0 0 1px #2196f3;
+    box-shadow: 0 0 1px ${props => props.color};
   }
   :checked + ${ToggleSliderRound}:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
+    -webkit-transform: translateX(20px);
+    -ms-transform: translateX(20px);
+    transform: translateX(20px);
   }
 `
 const FaMoonElement = styled(FaMoon)`
   position: absolute;
-  margin-top: 0.5em;
+  font-size: 1em !important;
+  right: 3.5em;
+  top: 0.48em;
   color: ${props => props.color};
 `
 export default Toggle

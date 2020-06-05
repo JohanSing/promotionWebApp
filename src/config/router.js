@@ -6,7 +6,6 @@ import {
   Switch
 } from 'react-router-dom'
 
-import Login from '../components/pages/Login'
 import Home from '../components/pages/Home'
 
 const Routes = () => {
@@ -14,7 +13,6 @@ const Routes = () => {
     <Router>
       <Switch>
         <Route exact path='/' component={Home} />
-        <Route exact path='/login' component={Login} />
         <Redirect to='/'></Redirect>
       </Switch>
     </Router>
