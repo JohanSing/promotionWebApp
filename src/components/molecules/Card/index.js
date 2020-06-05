@@ -19,6 +19,7 @@ const IsNullOrEmpty = value => {
 
 const Card = ({
   color,
+  fontColor,
   title,
   category,
   description,
@@ -34,7 +35,7 @@ const Card = ({
     CategoryComponent = null
   if (!IsNullOrEmpty(numberLike)) {
     LikeComponent = (
-      <IconTextContainer color={color}>
+      <IconTextContainer fontColor={fontColor} color={color}>
         <FaHeart />
         {numberLike}
       </IconTextContainer>
@@ -42,7 +43,7 @@ const Card = ({
   }
   if (!IsNullOrEmpty(date)) {
     DateComponent = (
-      <IconTextContainer color={color}>
+      <IconTextContainer fontColor={fontColor} color={color}>
         <FaRegCalendarAlt />
         {date}
       </IconTextContainer>
@@ -50,7 +51,7 @@ const Card = ({
   }
   if (!IsNullOrEmpty(category)) {
     CategoryComponent = (
-      <IconTextContainer color={color}>
+      <IconTextContainer fontColor={fontColor} color={color}>
         <FaRocket />
         {category}
       </IconTextContainer>
@@ -58,13 +59,13 @@ const Card = ({
   }
   return (
     <CardContainer color={color}>
-      <CardTitle>{title}</CardTitle>
-      <CardCategory>{CategoryComponent}</CardCategory>
-      <CardDescription text={description} />
+      <CardTitle fontColor={fontColor}>{title}</CardTitle>
+      <CardCategory fontColor={fontColor}>{CategoryComponent}</CardCategory>
+      <CardDescription text={description} color={fontColor} />
       {DateComponent}
       <SectionContainer>
-        <CardType text={type} />
-        <CardRead link={link} text={linkName} />
+        <CardType fontColor={fontColor} text={type} />
+        <CardRead fontColor={fontColor} link={link} text={linkName} />
       </SectionContainer>
       {LikeComponent}
     </CardContainer>
@@ -73,6 +74,7 @@ const Card = ({
 
 Card.propTypes = {
   color: PropTypes.string,
+  fontColor: PropTypes.string,
   title: PropTypes.string,
   date: PropTypes.string,
   category: PropTypes.string,

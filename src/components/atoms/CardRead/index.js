@@ -5,13 +5,13 @@ import PropTypes from 'prop-types'
 const Wrapper = styled.a`
   align-self: flex-end;
   text-decoration: none;
-  color: black;
+  color: ${props => props.fontColor};
   font-family: 'Francois One';
 `
 
 const CardRead = ({ text, link = '#', ...props }) => {
   return (
-    <Wrapper href={link} props>
+    <Wrapper fontColor={props.fontColor} href={link} props>
       {text}
     </Wrapper>
   )
