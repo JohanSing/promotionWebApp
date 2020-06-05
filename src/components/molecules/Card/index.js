@@ -40,7 +40,6 @@ const Card = ({
       </IconTextContainer>
     )
   }
-  console.log(date)
   if (!IsNullOrEmpty(date)) {
     DateComponent = (
       <IconTextContainer color={color}>
