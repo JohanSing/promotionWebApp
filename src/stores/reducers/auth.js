@@ -2,9 +2,10 @@ import { GET_AUTH } from '../actions/auth'
 
 const initialState = {
   authUser: {
+    access_token: null,
     user: {
-      photoURL: '',
-      displayName: ''
+      photoURL: null,
+      displayName: null
     }
   }
 }

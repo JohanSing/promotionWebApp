@@ -43,6 +43,7 @@ const AvatarContainer = styled.div`
 
 const UserName = styled.p`
   margin-left: 10px;
+  color: ${props => props.colorFont};
 `
 
 export default AvatarComponent
