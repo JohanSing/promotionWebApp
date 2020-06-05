@@ -8,6 +8,7 @@ import Textarea from '../atoms/TextArea'
 import styled from 'styled-components'
 import ToggleForm from '../atoms/ToggleForm'
 import { getCategories } from '../../stores/actions/createPage'
+import { useTranslation } from 'react-i18next'
 
 const CreateProjectContainer = styled.div`
   padding: 1em;
@@ -49,6 +50,7 @@ const CreateProject = () => {
   const categories = useSelector(state => state.createPage.categories)
   const themeState = useSelector(state => state.global.theme)
   const [form, setForm] = useState(templateForm)
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getCategories())
@@ -61,18 +63,18 @@ const CreateProject = () => {
         <Input
           inputColor={themeState.colors.btnFontPrimary}
           type='text'
-          labelName='Title'
+          labelName={t('createPage.form.title')}
         />
         <Textarea
           inputColor={themeState.colors.btnFontPrimary}
           name='author-surnname'
           id='description'
-          inputName='Description'
+          inputName={t('createPage.form.description')}
         ></Textarea>
         <Input
           inputColor={themeState.colors.btnFontPrimary}
           type='date'
-          labelName='Last Release'
+          labelName={t('createPage.form.last_release')}
         />
         <SectionStatsContainer mediumScreen={themeState.sizes.tablet}>
           <Input
@@ -80,27 +82,27 @@ const CreateProject = () => {
             type='number'
             min='0'
             value='0'
-            labelName={`Nombre d'issue remonté`}
+            labelName={t('createPage.form.nbIssue')}
           />
           <Input
             inputColor={themeState.colors.btnFontPrimary}
             type='number'
             min='0'
             value='0'
-            labelName={`Nombre de contributeurs`}
+            labelName={t('createPage.form.nbContributor')}
           />
           <Input
             inputColor={themeState.colors.btnFontPrimary}
             type='number'
             min='0'
             value='0'
-            labelName={`Nombre de release`}
+            labelName={t('createPage.form.nbRelease')}
           />
         </SectionStatsContainer>
         <CategoryContainer>
           <Select
-            name='category'
-            color={themeState.colors.btnFontPrimary}
+            name={t('createPage.form.category')}
+            color={themeState.colors.backgroundMain}
             required
           >
             <option value='' disabled selected></option>
@@ -113,19 +115,19 @@ const CreateProject = () => {
             })}
           </Select>
           <ToggleForm
-            nameOff='Public'
-            nameOn='Prive'
+            nameOff={t('createPage.form.toggleOff')}
+            nameOn={t('createPage.form.toggleOn')}
             inputName='checkbox'
-            color='green'
+            color={themeState.colors.backgroundMain}
           />
         </CategoryContainer>
         <Button
           name='Créer votre projet'
-          borderColor='blue'
-          textHoverColor='blue'
-          fillingColor='blue'
+          borderColor={themeState.colors.backgroundMain}
+          textHoverColor={themeState.colors.backgroundMain}
+          fillingColor={themeState.colors.backgroundMain}
           textColor='white'
-          IsInvert={false}
+          IsInvert={themeState.colors.backgroundMain}
           onClick={() => console.log('test')}
         ></Button>
       </CreateProjectContainer>

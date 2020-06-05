@@ -5,6 +5,19 @@
     "newPost": "New post",
     "newProject": "New project",
     "searchInput":"Enter a key to begin your search",
+    "createPage":{
+      "form":{
+        "title":"Titler",
+        "description":"Description",
+        "last_release":"Last release",
+        "nbIssue":"Description",
+        "nbContributor":"Number of contributors",
+        "nbRelease":"Number of releases",
+        "category":"Category",
+        "toggleOn":"Privée",
+        "toggleOff":"Public"
+      }
+    },
     "cardLink":"Read",
     "search":"Search",
     "langEn": "English",

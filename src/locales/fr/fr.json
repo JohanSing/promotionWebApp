@@ -6,6 +6,19 @@
     "newProject": "Nouveau projet",
     "search":"Rechercher",
     "searchInput":"Insérez du texte",
+    "createPage":{
+      "form":{
+        "title":"Titre",
+        "description":"Description",
+        "last_release":"Dernière release",
+        "nbIssue":"Nombre d'issue",
+        "nbContributor":"Nombre de contributeurs",
+        "nbRelease":"Nombre de releases",
+        "category":"Categorie",
+        "toggleOn":"Privée",
+        "toggleOff":"Public"
+      }
+    },
     "cardLink":"Lire la suite >",
     "langEn": "Anglais",
     "langFr": "Français"
