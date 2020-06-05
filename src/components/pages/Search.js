@@ -15,7 +15,7 @@ const Search = () => {
   const dispatch = useDispatch()
 
   return (
-    <Template>
+    <Template colorBackground={themeState.colors.backgroundMain}>
       <SearchContainer>
         <div>
           <Input

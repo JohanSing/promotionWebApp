@@ -4,10 +4,13 @@ import PropTypes from 'prop-types'
 
 const CardTypeContainer = styled.div`
   align-self: flex-start;
+  color: ${props => props.fontColor};
 `
 
 const CardType = ({ text, ...props }) => {
-  return <CardTypeContainer>{text}</CardTypeContainer>
+  return (
+    <CardTypeContainer fontColor={props.fontColor}>{text}</CardTypeContainer>
+  )
 }
 
 CardType.propTypes = {

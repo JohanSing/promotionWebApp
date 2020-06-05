@@ -6,10 +6,15 @@ const Container = styled.div`
   margin-top: 0.5em;
   margin-bottom: 0.5em;
   font-family: 'Lato';
+  color: ${props => props.fontColor};
 `
 
 const CardTitle = ({ ...props }) => {
-  return <Container props>{props.children}</Container>
+  return (
+    <Container fontColor={props.fontColor} props>
+      {props.children}
+    </Container>
+  )
 }
 
 export default CardTitle

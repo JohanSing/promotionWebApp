@@ -1,113 +1,106 @@
-import React, { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-
-import Navbar from '../molecules/FullNavbar'
-import { retrieveAuth } from '../../stores/actions/auth'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
+import { useSelector } from 'react-redux'
+import { useTranslation } from 'react-i18next'
+
+import moment from 'moment'
+
+import Template from '../templates/ClientTemplate'
+import Card from '../molecules/Card'
 import projects from '../../datas/projects.json'
 import posts from '../../datas/posts.json'
+import categories from '../../datas/categories.json'
 
 const Home = () => {
-  const dispatch = useDispatch()
+  const { t } = useTranslation()
   const themeState = useSelector(state => state.global.theme)
-  const authState = useSelector(state => state.auth.authUser)
+  const [items, setItems] = useState([])
+
+  const retrievePostsAndProjects = () => {
+    let postsRetrieved = [],
+      projectsRetrieved = []
+    projectsRetrieved = projects.filter(project => {
+      return project
+    })
+
+    postsRetrieved = posts.filter(post => {
+      return post
+    })
+
+    projectsRetrieved = projectsRetrieved.map(project => {
+      let category = categories.filter(categorie => {
+        if (categorie.id === project.categoryId) {
+          return categorie
+        }
+      })[0]
+
+      project.category = category.name
+      project.created_at = moment(project.createdAt).format(
+        'YYYY-MM-DD HH:mm:ss'
+      )
+
+      return project
+    })
+
+    return projectsRetrieved.concat(postsRetrieved)
+  }
 
   useEffect(() => {
-    dispatch(retrieveAuth())
+    setItems(retrievePostsAndProjects())
   }, [])
 
   return (
-    <Container>
-      <Navbar theme={themeState} authUser={authState}></Navbar>
-      <ProjectContainer>
-        {projects.map(project => {
-          return (
-            <Card key={project.id}>
-              <Title>Title: {project.title}</Title>
-              <Date>Created at: {project.createdAt}</Date>
-              <Description>
-                <ul>
-                  <li>Is private : {project.isPrivate}</li>
-                  <li>Categorie: {project.Categorie}</li>
-                  <li>Contribution number: {project.nbContributors}</li>
-                  <li>License: {project.license}</li>
-                  <li>Number of Releases: {project.nbReleases}</li>
-                  <li>Number of issues: {project.nbIssues}</li>
-                </ul>
-              </Description>
-            </Card>
-          )
-        })}
-      </ProjectContainer>
-      <PostContainer>
-        {posts.map(post => {
-          return (
-            <Card key={post.id}>
-              <Title>Title: {post.title}</Title>
-              <Date>Created at: {post.created_at}</Date>
-              <Description>
-                <ul>
-                  <li>Description : {post.description}</li>
-                  <li>Author: {post.author}</li>
-                  <li>Type: {post.type}</li>
-                </ul>
-              </Description>
-            </Card>
-          )
-        })}
-      </PostContainer>
-    </Container>
+    <Template colorBackground={themeState.colors.backgroundMain}>
+      <HomeContainer>
+        <ItemsContainer
+          mediumScreen={themeState.sizes.tablet}
+          largeScreen={themeState.sizes.laptop}
+          FourKScreen={themeState.sizes.desktopL}
+        >
+          {items.map((value, index) => {
+            if (value === undefined || value === null) return
+            return (
+              <Card
+                key={index}
+                color={themeState.colors.btnBackgroundPrimaryHover}
+                fontColor={themeState.colors.fontMain}
+                title={value.title}
+                category={value.category}
+                description={value.description}
+                date={value.created_at}
+                type={value.type}
+                link='#'
+                linkName={t('cardLink')}
+                numberLike={value.numberLike}
+              />
+            )
+          })}
+        </ItemsContainer>
+      </HomeContainer>
+    </Template>
   )
 }
 
-const Title = styled.h2`
-  color: #000;
-  font-weight: 300;
-`
-
-const Date = styled.div`
-  color: #ccc;
-  font-weight: 300;
-  margin: 6px 0;
-`
-
-const Description = styled.p`
-  color: #000;
-  font-weight: 300;
-`
-const Container = styled.div`
-  background-color: #fff;
-  font-weight: 300;
-  width: 100%;
-  padding: 25px;
+const HomeContainer = styled.div`
   display: flex;
+  padding: 6em 4em;
   justify-content: space-between;
+  flex-direction: column;
 `
 
-const ProjectContainer = styled.div`
-  background-color: #fff;
-  font-weight: 300;
-  width: 100%;
-  padding: 25px;
-`
-
-const PostContainer = styled.div`
-  background-color: #fff;
-  font-weight: 300;
-  width: 100%;
-  padding: 25px;
-`
-
-const Card = styled.div`
-  background-color: #fff;
-  font-weight: 300;
-  width: 90%;
-  -webkit-box-shadow: -12px -2px 34px -3px rgba(0, 0, 0, 0.56);
-  -moz-box-shadow: -12px -2px 34px -3px rgba(0, 0, 0, 0.56);
-  box-shadow: -12px -2px 34px -3px rgba(0, 0, 0, 0.56);
-  padding: 10px;
-  margin: 10px;
-  border-radius: 7px;
+const ItemsContainer = styled.div`
+  padding: 0.4em;
+  display: grid;
+  grid-gap: 0.5rem;
+  @media ${props => props.mediumScreen} {
+    grid-template-columns: repeat(2, 30em);
+  }
+  @media ${props => props.largeScreen} {
+    grid-template-columns: repeat(3, 26em);
+  }
+  @media ${props => props.FourKScreen} {
+    grid-template-columns: repeat(7, 26em);
+  }
 `
 
 export default Home
