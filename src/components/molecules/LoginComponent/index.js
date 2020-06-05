@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import Proptypes from 'prop-types'
 import { FaGithub } from 'react-icons/fa'
+import { useTranslation } from 'react-i18next'
 
 import AvatarComponent from '../FullAvatar'
 import NavbarItemButton from '../../atoms/NavbarItem/NavbarItemButton'
 
 const LoginComponent = ({ action, theme, authUser }) => {
+  const { t } = useTranslation()
   const [userInfo, setUserInfo] = useState({ avatarURL: null, userName: null })
+
   useEffect(() => {
     setUserInfo({
       avatarURL: authUser.user.photoURL,
@@ -35,7 +38,7 @@ const LoginComponent = ({ action, theme, authUser }) => {
         action={action}
       >
         <FaGithub colorfont={theme.colors.fontMain} />
-        Login
+        {t('login')}
       </NavbarItemButton>
     )
   }

@@ -7,8 +7,7 @@ const NavbarItemIcon = ({ isActive = false, ...props }) => {
 }
 
 NavbarItemIcon.propTypes = {
-  isActive: Proptypes.bool,
-  children: Proptypes.element
+  isActive: Proptypes.bool
 }
 
 const NavbarItem = styled.div`
