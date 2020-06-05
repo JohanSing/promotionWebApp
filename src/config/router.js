@@ -15,7 +15,6 @@ const Routes = () => {
     <Router>
       <Switch>
         <Route exact path='/' component={Home} />
-        <Route exact path='/login' component={Login} />
         <Route exact path='/search' component={Search} />
         <Route exact path='/projects/create' component={CreateProject} />
         <Redirect to='/'></Redirect>
