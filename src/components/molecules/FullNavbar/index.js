@@ -15,7 +15,7 @@ import NavbarItemButton from '../../atoms/NavbarItem/NavbarItemButton'
 import NavbarItemIcon from '../../atoms/NavbarItem/NavbarItemIcon'
 import Toggle from '../../atoms/Toggle'
 import LoginComponent from '../LoginComponent'
-import IconEmojiLang from '../../atoms/Icon/IconEmojiLang'
+import IconEmojiLang from '../../atoms/IconItem/IconEmojiLang'
 
 const FullNavbar = ({ theme, authUser }) => {
   const { t, i18n } = useTranslation()
