@@ -2,11 +2,23 @@ import React from 'react'
 import styled from 'styled-components'
 import projects from '../../datas/projects.json'
 import posts from '../../datas/posts.json'
+import Input from '../atoms/Input'
+import { useSelector, useDispatch } from 'react-redux'
 
 const Home = () => {
+  const themeState = useSelector(state => state.global.theme)
+  const dispatch = useDispatch()
   return (
     <Container>
       <ProjectContainer>
+        <div>
+          <Input
+            inputColor={themeState.colors.btnFontPrimary}
+            type='text'
+            labelName='Projet'
+            onChange={event => dispatch(projects(event.target.value))}
+          />
+        </div>
         {projects.map(project => {
           return (
             <Card key={project.id}>
@@ -27,6 +39,14 @@ const Home = () => {
         })}
       </ProjectContainer>
       <PostContainer>
+        <div>
+          <Input
+            inputColor={themeState.colors.btnFontPrimary}
+            type='text'
+            labelName='Post'
+            onChange={event => dispatch(posts(event.target.value))}
+          />
+        </div>
         {posts.map(post => {
           return (
             <Card key={post.id}>
@@ -51,7 +71,7 @@ export default Home
 
 const Title = styled.h2`
   color: #000;
-  font-weight: 300;
+  font-weight: 500;
 `
 
 const Date = styled.div`
@@ -75,14 +95,14 @@ const Container = styled.div`
 
 const ProjectContainer = styled.div`
   background-color: #fff;
-  font-weight: 300;
+  font-weight: 700;
   width: 100%;
   padding: 25px;
 `
 
 const PostContainer = styled.div`
   background-color: #fff;
-  font-weight: 300;
+  font-weight: 700;
   width: 100%;
   padding: 25px;
 `

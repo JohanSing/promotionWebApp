@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux'
 
 import Login from '../components/pages/Login'
 import Home from '../components/pages/Home'
+import Detailproject from '../components/pages/Detailproject'
 
 const Routes = () => {
   const themeState = useSelector(state => state.global.theme)
@@ -20,6 +21,7 @@ const Routes = () => {
       <Switch>
         <Route exact path='/' component={Home} />
         <Route exact path='/login' component={Login} />
+        <Route exact path='/' component={Detailproject} />
         <Redirect to='/'></Redirect>
       </Switch>
     </Router>
