@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import Proptypes from 'prop-types'
 import styled from 'styled-components'
+import { useTranslation } from 'react-i18next'
 
 import { signInWithGithub } from '../../../stores/actions/auth'
 import { switchTheme } from '../../../stores/actions/global'
@@ -14,11 +15,18 @@ import NavbarItemButton from '../../atoms/NavbarItem/NavbarItemButton'
 import NavbarItemIcon from '../../atoms/NavbarItem/NavbarItemIcon'
 import Toggle from '../../atoms/Toggle'
 import LoginComponent from '../LoginComponent'
+import IconEmojiLang from '../../atoms/Icon/IconEmojiLang'
 
 const FullNavbar = ({ theme, authUser }) => {
+  const { t, i18n } = useTranslation()
   const dispatch = useDispatch()
   const [isNavbarActive, setIsNavbarActive] = useState(false)
   const [icon, setIcon] = useState(FaBars)
+
+  const changeLang = lang => {
+    i18n.changeLanguage(lang)
+    localStorage.setItem('lang', lang)
+  }
 
   const toggleTheme = () => {
     dispatch(switchTheme())
@@ -67,19 +75,19 @@ const FullNavbar = ({ theme, authUser }) => {
         colorBackground={theme.colors.backgroundMain}
       >
         <NavbarItemLink
-          name='Categories'
+          name={t('categories')}
           isActive={true}
           link='/'
           colorFont={theme.colors.fontMain}
         />
         <NavbarItemLink
-          name='New project'
+          name={t('newProject')}
           isActive={true}
           link='/'
           colorFont={theme.colors.fontMain}
         />
         <NavbarItemLink
-          name='New post'
+          name={t('newPost')}
           isActive={true}
           link='/'
           colorFont={theme.colors.fontMain}
@@ -89,6 +97,22 @@ const FullNavbar = ({ theme, authUser }) => {
           theme={theme}
           authUser={authUser}
         />
+        <WrapperLang>
+          <IconEmojiLang
+            action={changeLang}
+            lang='fr'
+            emoji='🇫🇷'
+            margin={'0 15px'}
+            size={'25px'}
+          />
+          <IconEmojiLang
+            action={changeLang}
+            lang='en'
+            emoji='🇬🇧'
+            margin={'0 15px'}
+            size={'25px'}
+          />
+        </WrapperLang>
       </TopBarMenu>
     </Navbar>
   )
@@ -132,6 +156,13 @@ const TopBarMenu = styled.div`
   justify-content: center;
   background-color: ${props => props.colorBackground};
   display: ${props => (props.isActive ? 'block' : 'none')};
+`
+
+const WrapperLang = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-left: 25px;
 `
 
 export default FullNavbar

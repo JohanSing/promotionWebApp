@@ -41,13 +41,16 @@ export const signInWithGithub = () => async dispatch => {
 export const retrieveAuth = () => dispatch => {
   const accessToken = localStorage.getItem('security_access')
   let authUser = JSON.parse(accessToken)
+
   if (authUser === null) {
     authUser = {
+      access_token: null,
       user: {
-        photoURL: '',
-        displayName: ''
+        photoURL: null,
+        displayName: null
       }
     }
   }
+
   dispatch(getAuth(authUser))
 }
