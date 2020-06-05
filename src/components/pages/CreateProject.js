@@ -7,7 +7,7 @@ import Button from '../atoms/Button'
 import Textarea from '../atoms/TextArea'
 import styled from 'styled-components'
 import ToggleForm from '../atoms/ToggleForm'
-import { getCategories } from '../../stores/actions/createPage'
+import { getCategories, createProject } from '../../stores/actions/createPage'
 import { useTranslation } from 'react-i18next'
 
 const CreateProjectContainer = styled.div`
@@ -25,8 +25,8 @@ const SectionStatsContainer = styled.div`
   display: grid;
 
   @media ${props => props.mediumScreen} {
-    grid-gap: 18em;
-    grid-template-columns: repeat(3, 15em);
+    grid-gap: 3em;
+    grid-template-columns: repeat(3, 17em);
   }
 `
 const CategoryContainer = styled.div`
@@ -34,6 +34,10 @@ const CategoryContainer = styled.div`
   margin-bottom: 1em;
   display: flex;
   flex-direction: column;
+`
+const ErrorMessageSpan = styled.span`
+  color: red;
+  text-align: center;
 `
 
 const templateForm = {
@@ -49,17 +53,38 @@ const templateForm = {
 }
 
 const CreateProject = () => {
+  const { t } = useTranslation()
+  const dispatch = useDispatch()
   const categories = useSelector(state => state.createPage.categories)
   const themeState = useSelector(state => state.global.theme)
   const [form, setForm] = useState(templateForm)
-  const { t } = useTranslation()
-  const dispatch = useDispatch()
+  const [errorMessage, setErrorMessage] = useState('')
+
   useEffect(() => {
     dispatch(getCategories())
-  }, [])
+  }, [dispatch])
+
   const registerProject = () => {
-    console.log(form)
+    let emptyFieldFound = false
+    Object.keys(form).forEach(value => {
+      if (
+        form[value] === null ||
+        form[value] === undefined ||
+        form[value] === ''
+      ) {
+        emptyFieldFound = true
+      }
+    })
+    if (emptyFieldFound) {
+      setErrorMessage(t('createPage.form.errorMessage'))
+      setTimeout(() => {
+        setErrorMessage('')
+      }, 3000)
+      return
+    }
+    dispatch(createProject(form))
   }
+
   return (
     <Template>
       <CreateProjectContainer>
@@ -127,9 +152,8 @@ const CreateProject = () => {
             name={t('createPage.form.category')}
             color={themeState.colors.btnBorderPrimary}
             required
-            onClick={event => {
+            action={event => {
               let select = event.target
-              console.log(select)
               setForm({
                 ...form,
                 categoryId: select[select.selectedIndex].value
@@ -150,19 +174,19 @@ const CreateProject = () => {
             nameOn={t('createPage.form.toggleOn')}
             inputName='checkbox'
             color={themeState.colors.btnBorderPrimary}
-            onClick={event => {
-              console.log(event.target.checked)
+            action={event => {
               setForm({ ...form, isPrivate: event.target.checked })
             }}
           />
         </CategoryContainer>
+        <ErrorMessageSpan>{errorMessage}</ErrorMessageSpan>
         <Button
           name='Créer votre projet'
           borderColor={themeState.colors.btnBorderPrimary}
           textHoverColor={themeState.colors.btnBorderPrimary}
           fillingColor={themeState.colors.btnBorderPrimary}
           textColor='white'
-          IsInvert={themeState.colors.btnBorderPrimary}
+          IsInvert={true}
           onClick={registerProject}
         ></Button>
       </CreateProjectContainer>

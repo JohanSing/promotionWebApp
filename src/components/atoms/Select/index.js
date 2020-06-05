@@ -68,10 +68,10 @@ const SelectLabel = styled.label`
   }
 `
 
-const Select = ({ name, color = 'green', ...props }) => {
+const Select = ({ name, color = 'green', action, ...props }) => {
   return (
     <SelectContainer>
-      <SelectComponent props color={color}>
+      <SelectComponent props onChange={event => action(event)} color={color}>
         {props.children}
       </SelectComponent>
       <SelectHighlight />

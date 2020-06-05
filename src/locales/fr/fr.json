@@ -16,7 +16,10 @@
         "nbRelease":"Nombre de releases",
         "category":"Categorie",
         "toggleOn":"Privée",
-        "toggleOff":"Public"
+        "toggleOff":"Public",
+        "licence":"Licence",
+        "confirmButton":"Créez votre projet",
+        "errorMessage":"Vous avez omis un champs dans le formulaire"
       }
     },
     "cardLink":"Lire la suite >",

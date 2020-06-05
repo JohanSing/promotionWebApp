@@ -15,7 +15,10 @@
         "nbRelease":"Number of releases",
         "category":"Category",
         "toggleOn":"Privée",
-        "toggleOff":"Public"
+        "toggleOff":"Public",
+        "licence":"Licence",
+        "confirmButton":"Create your project",
+        "errorMessage":"You have omitted a field in the form"
       }
     },
     "cardLink":"Read",

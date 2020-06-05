@@ -54,6 +54,7 @@ const ToggleOff = styled.span`
   opacity: 1;
   color: #bbbbbb;
 `
+
 const ToggleInput = styled.input`
   position: absolute;
   left: -5000px;
@@ -96,6 +97,7 @@ const ToggleForm = ({
         color={color}
         name={inputName}
         id={inputName}
+        onChange={event => action(event)}
         type='checkbox'
       />
       <ToggleLabel htmlFor={inputName} className='checkbox-label'>
