@@ -3,7 +3,7 @@ import { SEARCH_ELEMENT } from '../actions/searchPage'
 import projects from '../../datas/projects.json'
 import posts from '../../datas/posts.json'
 import categories from '../../datas/categories.json'
-
+import moment from 'moment'
 const initialState = {
   data: []
 }
@@ -30,7 +30,7 @@ const searchEngine = text => {
       }
     })[0]
     project.category = category.name
-    project.created_at = project.createdAt
+    project.created_at = moment(project.createdAt).format('YYYY-MM-DD HH:mm:ss')
     return project
   })
   return projectsRetrieved.concat(postsRetrieved)
