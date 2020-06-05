@@ -12,7 +12,7 @@ const searchEngine = text => {
   let postsRetrieved = [],
     projectsRetrieved = []
   projectsRetrieved = projects.filter(project => {
-    if (project.title.includes(text)) {
+    if (project.title.includes(text) && !project.isPrivate) {
       return project
     }
   })

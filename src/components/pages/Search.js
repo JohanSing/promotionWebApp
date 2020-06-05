@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 
 import Template from '../templates/ClientTemplate'
 import Input from '../atoms/Input'
@@ -8,6 +9,7 @@ import Card from '../molecules/Card'
 import { searchElement } from '../../stores/actions/searchPage'
 
 const Search = () => {
+  const { t } = useTranslation()
   const themeState = useSelector(state => state.global.theme)
   const resultSearch = useSelector(state => state.searchPage.data)
   const dispatch = useDispatch()
@@ -17,10 +19,9 @@ const Search = () => {
       <SearchContainer>
         <div>
           <Input
-            placeholder='Entrez quelque chose pour commencer la rechercher'
+            labelName={t('searchInput')}
             inputColor={themeState.colors.btnFontPrimary}
             type='text'
-            labelName='Recherche'
             onChange={event => dispatch(searchElement(event.target.value))}
           />
         </div>
@@ -41,7 +42,7 @@ const Search = () => {
                 date={value.created_at}
                 type={value.type}
                 link='#'
-                linkName='Lire la suite >'
+                linkName={t('cardLink')}
                 numberLike={value.numberLike}
               />
             )
@@ -53,7 +54,7 @@ const Search = () => {
 }
 const SearchContainer = styled.div`
   display: flex;
-  padding: 2em;
+  padding: 4em;
   justify-content: space-between;
   flex-direction: column;
 `

@@ -1,0 +1,12 @@
+{
+  "translation": {
+    "login": "Se connecter",
+    "categories": "Catégories",
+    "newPost": "Nouvelle annonce",
+    "newProject": "Nouveau projet",
+    "search":"Rechercher",
+    "searchInput":"Insérez du texte",
+    "langEn": "Anglais",
+    "langFr": "Français"
+  }
+}
