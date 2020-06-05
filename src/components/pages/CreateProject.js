@@ -31,9 +31,8 @@ const SectionStatsContainer = styled.div`
 const CategoryContainer = styled.div`
   margin-top: 1em;
   margin-bottom: 1em;
-  display: grid;
-  grid-gap: 18em;
-  grid-template-columns: repeat(2, 3em);
+  display: flex;
+  flex-direction: column;
 `
 const templateForm = {
   title: '',
@@ -49,7 +48,7 @@ const templateForm = {
 const CreateProject = () => {
   const categories = useSelector(state => state.createPage.categories)
   const themeState = useSelector(state => state.global.theme)
-  const [form, setForm] = useState()
+  const [form, setForm] = useState(templateForm)
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getCategories())
@@ -99,13 +98,6 @@ const CreateProject = () => {
           />
         </SectionStatsContainer>
         <CategoryContainer>
-          <ToggleForm
-            nameOff='Off'
-            nameOn='On'
-            inputName='checkbox'
-            color='green'
-          />
-
           <Select
             name='category'
             color={themeState.colors.btnFontPrimary}
@@ -120,6 +112,12 @@ const CreateProject = () => {
               )
             })}
           </Select>
+          <ToggleForm
+            nameOff='Public'
+            nameOn='Prive'
+            inputName='checkbox'
+            color='green'
+          />
         </CategoryContainer>
         <Button
           name='Créer votre projet'

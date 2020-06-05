@@ -11,7 +11,7 @@ const LoginComponent = ({ action, theme, authUser }) => {
   const [userInfo, setUserInfo] = useState({ avatarURL: null, userName: null })
 
   useEffect(() => {
-    if (authUser.access_token !== null) {
+    if (authUser != undefined && authUser.access_token !== null) {
       setUserInfo({
         avatarURL: authUser.user.photoURL,
         userName: authUser.user.displayName
@@ -19,7 +19,7 @@ const LoginComponent = ({ action, theme, authUser }) => {
     }
   }, [authUser])
 
-  if (authUser.access_token !== null) {
+  if (authUser != undefined && authUser.access_token !== null) {
     return (
       <AvatarComponent
         colorBorderAvatar={theme.colors.btnBorderSecondary}

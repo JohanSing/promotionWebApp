@@ -34,7 +34,7 @@ const ToggleOn = styled.span`
   z-index: 0;
   left: 0;
   opacity: 1;
-  min-width: 300px;
+  width: 100%;
   line-height: 50px;
   transition: 0.25s ease-in-out;
   opacity: 0;
