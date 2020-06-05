@@ -2,6 +2,7 @@
   {
     "id": 1,
     "title": "Optimus",
+    "description":"description 1",
     "nbIssues": 547,
     "nbReleases": 595,
     "isPrivate": false,
@@ -15,6 +16,7 @@
   {
     "id": 2,
     "title": "Eros",
+    "description":"description 2",
     "nbIssues": 782,
     "nbReleases": 675,
     "isPrivate": false,
@@ -28,6 +30,7 @@
   {
     "id": 3,
     "title": "Hapi",
+    "description":"description 3",
     "nbIssues": 721,
     "nbReleases": 91,
     "isPrivate": false,
@@ -41,6 +44,7 @@
   {
     "id": 4,
     "title": "Hiroke",
+    "description":"description 4",
     "nbIssues": 774,
     "nbReleases": 698,
     "isPrivate": false,
@@ -54,6 +58,7 @@
   {
     "id": 5,
     "title": "Pimp my Term",
+    "description":"description 5",
     "nbIssues": 319,
     "nbReleases": 247,
     "isPrivate": true,

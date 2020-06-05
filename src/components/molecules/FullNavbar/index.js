@@ -92,6 +92,12 @@ const FullNavbar = ({ theme, authUser }) => {
           link='/'
           colorFont={theme.colors.fontMain}
         />
+        <NavbarItemLink
+          name={t('search')}
+          isActive={true}
+          link='/search'
+          colorFont={theme.colors.fontMain}
+        />
         <LoginComponent
           action={githubLogin}
           theme={theme}
