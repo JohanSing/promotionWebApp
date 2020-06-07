@@ -106,6 +106,7 @@ const Select = ({ name, color = 'green', action, ...props }) => {
 
 Select.propTypes = {
   color: PropTypes.string,
-  name: PropTypes.string
+  name: PropTypes.string,
+  action: PropTypes.func
 }
 export default Select
