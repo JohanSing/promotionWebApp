@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import PropTypes from 'prop-types';
+import React from 'react'
+import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 const FormInput = ({
   labelName,
@@ -23,8 +23,8 @@ const FormInput = ({
       />
       <LabelComponent htmlFor={name}>{labelName}</LabelComponent>
     </InputContainer>
-  );
-};
+  )
+}
 
 const LabelComponent = styled.label`
   position: absolute;
@@ -33,7 +33,7 @@ const LabelComponent = styled.label`
   transition: 0.2s;
   font-size: 12px;
   color: #9b9b9b;
-`;
+`
 
 const InputComponent = styled.input`
   font-family: inherit;
@@ -42,7 +42,7 @@ const InputComponent = styled.input`
   border-bottom: 1px solid #d2d2d2;
   outline: 0;
   font-size: 16px;
-  color: #212121;
+  color: ${props => props.inputColor};
   padding: 7px 0;
   background: transparent;
   transition: border-color 0.2s;
@@ -66,13 +66,13 @@ const InputComponent = styled.input`
   &::placeholder {
     color: transparent;
   }
-`;
+`
 
 const InputContainer = styled.div`
   position: relative;
   padding: 15px 0 0;
   margin-top: 10px;
-`;
+`
 FormInput.defaultProps = {
   labelName: '',
   type: 'text',
@@ -80,7 +80,7 @@ FormInput.defaultProps = {
   id: '',
   placeholder: 'Placeholder',
   inputColor: 'Yellow'
-};
+}
 
 FormInput.propTypes = {
   labelName: PropTypes.string,
@@ -89,6 +89,6 @@ FormInput.propTypes = {
   id: PropTypes.string,
   placeholder: PropTypes.string,
   inputColor: PropTypes.string
-};
+}
 
-export default FormInput;
+export default FormInput

@@ -7,13 +7,23 @@ import Button from '../atoms/Button'
 import Textarea from '../atoms/TextArea'
 import styled from 'styled-components'
 import ToggleForm from '../atoms/ToggleForm'
-import { getCategories, createProject } from '../../stores/actions/createPage'
+import {
+  getCategories,
+  createProject,
+  getGithubRepositories,
+  getGithubRepository
+} from '../../stores/actions/createPage'
 import { useTranslation } from 'react-i18next'
 
 const CreateProjectContainer = styled.div`
   padding: 1em;
   display: flex;
   flex-direction: column;
+  padding-top: 3em;
+
+  media ${props => props.mediumScreen} {
+    padding-top: 1em;
+  }
 `
 
 const Title = styled.h3`
@@ -39,31 +49,38 @@ const ErrorMessageSpan = styled.span`
   color: red;
   text-align: center;
 `
-
-const templateForm = {
-  title: '',
-  description: '',
-  nbIssues: 0,
-  nbReleases: 0,
-  isPrivate: false,
-  license: '',
-  lastRelease: '',
-  nbContributors: null,
-  categoryId: null
-}
-
+const SuccessMessageSpan = styled.span`
+  color: green;
+  text-align: center;
+`
 const CreateProject = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const categories = useSelector(state => state.createPage.categories)
   const themeState = useSelector(state => state.global.theme)
-  const [form, setForm] = useState(templateForm)
+  const categories = useSelector(state => state.createPage.categories)
+  const listProjects = useSelector(state => state.createPage.listProjects)
+  const projectsOwner = useSelector(state => state.createPage.projectsOwner)
+  const form = useSelector(state => state.createPage.createPageForm)
+  const [finalForm, setFinalForm] = useState(form)
+  const projectRegistered = useSelector(state => state.createPage.IsRegistered)
   const [errorMessage, setErrorMessage] = useState('')
+  let successSpan = null
+  const getProjectInformation = event => {
+    let projectName = event.target.options[event.target.selectedIndex].value
+    dispatch(getGithubRepository(projectsOwner, projectName))
+  }
 
   useEffect(() => {
+    dispatch(getGithubRepositories())
     dispatch(getCategories())
-  }, [dispatch])
+  }, [dispatch, finalForm])
 
+  if (projectRegistered) {
+    setTimeout(() => console.log('je passe'), 3000)
+    successSpan = (
+      <SuccessMessageSpan>{t('successRegistered')}</SuccessMessageSpan>
+    )
+  }
   const registerProject = () => {
     let emptyFieldFound = false
     Object.keys(form).forEach(value => {
@@ -80,43 +97,56 @@ const CreateProject = () => {
       setTimeout(() => {
         setErrorMessage('')
       }, 3000)
-      return
     }
     dispatch(createProject(form))
   }
 
   return (
     <Template>
-      <CreateProjectContainer>
+      <CreateProjectContainer mediumScreen={themeState.sizes.tablet}>
         <Title>Création d'un projet</Title>
+        <Select
+          name='Liste des projets'
+          color={themeState.colors.btnBorderPrimary}
+          required
+          action={getProjectInformation}
+        >
+          <option value='' disabled selected></option>
+          {listProjects.map((project, index) => {
+            return (
+              <option key={index} value={project.id}>
+                {project.name}
+              </option>
+            )
+          })}
+        </Select>
         <Input
           inputColor={themeState.colors.btnBorderPrimary}
           type='text'
           labelName={t('createPage.form.title')}
-          onChange={event => setForm({ ...form, title: event.target.value })}
+          value={form.title}
+          onChange={event =>
+            setFinalForm({ ...form, title: event.target.value })
+          }
         />
         <Textarea
           inputColor={themeState.colors.btnBorderPrimary}
           name='author-surnname'
           id='description'
+          value={form.description}
           inputName={t('createPage.form.description')}
-          onChange={event =>
-            setForm({ ...form, description: event.target.value })
-          }
         ></Textarea>
         <Input
           inputColor={themeState.colors.btnBorderPrimary}
           type='text'
           labelName={t('createPage.form.licence')}
-          onChange={event => setForm({ ...form, license: event.target.value })}
+          onChange={event => {}}
         />
         <Input
           inputColor={themeState.colors.btnBorderPrimary}
           type='date'
           labelName={t('createPage.form.last_release')}
-          onChange={event =>
-            setForm({ ...form, lastRelease: event.target.value })
-          }
+          value={form.lastRelease}
         />
         <SectionStatsContainer mediumScreen={themeState.sizes.tablet}>
           <Input
@@ -124,27 +154,21 @@ const CreateProject = () => {
             type='number'
             min='0'
             labelName={t('createPage.form.nbIssue')}
-            onChange={event =>
-              setForm({ ...form, nbIssues: event.target.value })
-            }
+            value={form.nbIssues}
           />
           <Input
             inputColor={themeState.colors.btnBorderPrimary}
             type='number'
             min='0'
             labelName={t('createPage.form.nbContributor')}
-            onChange={event =>
-              setForm({ ...form, nbContributors: event.target.value })
-            }
+            value={form.nbContributors}
           />
           <Input
             inputColor={themeState.colors.btnBorderPrimary}
             type='number'
             min='0'
             labelName={t('createPage.form.nbRelease')}
-            onChange={event =>
-              setForm({ ...form, nbReleases: event.target.value })
-            }
+            value={form.nbReleases}
           />
         </SectionStatsContainer>
         <CategoryContainer>
@@ -154,10 +178,6 @@ const CreateProject = () => {
             required
             action={event => {
               let select = event.target
-              setForm({
-                ...form,
-                categoryId: select[select.selectedIndex].value
-              })
             }}
           >
             <option value='' disabled selected></option>
@@ -174,11 +194,10 @@ const CreateProject = () => {
             nameOn={t('createPage.form.toggleOn')}
             inputName='checkbox'
             color={themeState.colors.btnBorderPrimary}
-            action={event => {
-              setForm({ ...form, isPrivate: event.target.checked })
-            }}
+            action={event => {}}
           />
         </CategoryContainer>
+        {successSpan}
         <ErrorMessageSpan>{errorMessage}</ErrorMessageSpan>
         <Button
           name='Créer votre projet'

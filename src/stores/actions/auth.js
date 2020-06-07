@@ -27,10 +27,10 @@ export const signInWithGithub = () => async dispatch => {
       console.log(err)
     }
   }
-
   const authUser = {
     access_token: response.credential.accessToken,
-    user: response.user
+    user: response.user,
+    userId: response.user.providerData[0].uid
   }
 
   localStorage.setItem('security_access', JSON.stringify(authUser))

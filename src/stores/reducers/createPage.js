@@ -1,13 +1,34 @@
-import { GET_CATEGORIES } from '../actions/createPage'
+import {
+  GET_CATEGORIES,
+  GET_GITHUB_PROJECTS,
+  GET_GITHUB_PROJECT
+} from '../actions/createPage'
 import { REGISTER_PROJECT } from '../actions/createPage'
 
 import categories from '../../datas/categories.json'
 import projects from '../../datas/projects.json'
 import moment from 'moment'
+
+const templateForm = {
+  title: '',
+  description: '',
+  nbIssues: 0,
+  nbReleases: 0,
+  isPrivate: false,
+  license: '',
+  lastRelease: '',
+  nbContributors: 0,
+  categoryId: null
+}
+
 const initialState = {
   categories: [],
-  success: ''
+  IsRegistered: false,
+  listProjects: [],
+  createPageForm: templateForm,
+  projectsOwner: ''
 }
+
 const getCategories = () => {
   return categories.map(category => {
     return {
@@ -16,8 +37,8 @@ const getCategories = () => {
     }
   })
 }
+
 const registerProject = project => {
-  console.log(project)
   let projectsStorage = localStorage.getItem('projects')
   project.createdAt = moment().format('YYYY-MM-DD HH:mm:ss')
   project.updatedAt = moment().format('YYYY-MM-DD HH:mm:ss')
@@ -27,17 +48,18 @@ const registerProject = project => {
     projectsStorage = JSON.parse(projectsStorage)
   }
   let allProjects = projects.concat(projectsStorage)
-  let valueMax = 0
   let maxId =
-    allProjects.reduce((projectFound, valueMax) => {
-      if (valueMax < project.id) {
-        valueMax = project.id
+    allProjects.reduce((projectFound, pro) => {
+      if (pro.id < projectFound.id) {
+        return projectFound
       }
-    }) + 1
+    }).id + 1
   project.id = maxId
+  project.userId = JSON.parse(localStorage.getItem('security_access')).userId
   projectsStorage.push(project)
   localStorage.setItem('projects', JSON.stringify(projectsStorage))
 }
+
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_CATEGORIES:
@@ -45,9 +67,20 @@ export default (state = initialState, action) => {
         ...state,
         categories: getCategories()
       }
+    case GET_GITHUB_PROJECTS:
+      return {
+        ...state,
+        listProjects: action.payload,
+        projectsOwner: action.username
+      }
+    case GET_GITHUB_PROJECT:
+      return {
+        ...state,
+        createPageForm: action.payload
+      }
     case REGISTER_PROJECT:
       registerProject(action.payload)
-      return { ...state }
+      return { ...state, IsRegistered: true }
     default:
       return state
   }

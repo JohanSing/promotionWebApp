@@ -6,7 +6,6 @@ const SelectContainer = styled.div`
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   position: relative;
   width: 100%;
-  max-width: 12em;
   &:after {
     position: absolute;
     top: 18px;
@@ -35,7 +34,7 @@ const SelectHighlight = styled.span`
 const SelectBar = styled.span`
   position: relative;
   display: block;
-  width: 350px;
+  width: 100%;
   &:before,
   &:after {
     content: '';
@@ -64,29 +63,15 @@ const SelectLabel = styled.label`
   top: 10px;
   transition: 0.2s ease all;
   &:focus ~ ${SelectBar}:before, &:focus ~ ${SelectBar}:after {
-    width: 50%;
+    width: 100%;
   }
 `
-
-const Select = ({ name, color = 'green', action, ...props }) => {
-  return (
-    <SelectContainer>
-      <SelectComponent props onChange={event => action(event)} color={color}>
-        {props.children}
-      </SelectComponent>
-      <SelectHighlight />
-      <SelectBar color={color} />
-      <SelectLabel>{name}</SelectLabel>
-    </SelectContainer>
-  )
-}
 
 const SelectComponent = styled.select`
   position: relative;
   font-family: inherit;
   background-color: transparent;
   width: 100%;
-  max-width: 12em;
   padding: 10px 10px 10px 0;
   font-size: 18px;
   border-radius: 0;
@@ -105,6 +90,20 @@ const SelectComponent = styled.select`
     font-size: 14px;
   }
 `
+
+const Select = ({ name, color = 'green', action, ...props }) => {
+  return (
+    <SelectContainer>
+      <SelectComponent props onChange={event => action(event)} color={color}>
+        {props.children}
+      </SelectComponent>
+      <SelectHighlight />
+      <SelectBar color={color} />
+      <SelectLabel>{name}</SelectLabel>
+    </SelectContainer>
+  )
+}
+
 Select.propTypes = {
   color: PropTypes.string,
   name: PropTypes.string
