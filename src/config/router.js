@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux'
 import Home from '../components/pages/Home'
 import Search from '../components/pages/Search'
 import CreateProject from '../components/pages/CreateProject'
+import UserProjects from '../components/pages/UserProjects'
 
 const Routes = () => {
   const themeState = useSelector(state => state.global.theme)
@@ -22,6 +23,7 @@ const Routes = () => {
         <Route exact path='/' component={Home} />
         <Route exact path='/search' component={Search} />
         <Route exact path='/projects/create' component={CreateProject} />
+        <Route exact path='/user/projects' component={UserProjects} />
         <Redirect to='/'></Redirect>
       </Switch>
     </Router>

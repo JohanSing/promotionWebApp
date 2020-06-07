@@ -13,7 +13,7 @@ import {
   createProject,
   getGithubRepositories,
   getGithubRepository
-} from '../../stores/actions/createPage'
+} from '../../stores/actions/createProjectPage'
 import { useTranslation } from 'react-i18next'
 
 const CreateProjectContainer = styled.div`

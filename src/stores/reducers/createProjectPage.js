@@ -2,8 +2,8 @@ import {
   GET_CATEGORIES,
   GET_GITHUB_PROJECTS,
   GET_GITHUB_PROJECT
-} from '../actions/createPage'
-import { REGISTER_PROJECT } from '../actions/createPage'
+} from '../actions/createProjectPage'
+import { REGISTER_PROJECT } from '../actions/createProjectPage'
 
 import categories from '../../datas/categories.json'
 import projects from '../../datas/projects.json'

@@ -11,7 +11,16 @@ const initialState = {
 const searchEngine = text => {
   let postsRetrieved = [],
     projectsRetrieved = []
-  projectsRetrieved = projects.filter(project => {
+
+  let projectsStorage = localStorage.getItem('projects')
+  if (projectsStorage === null || projectsStorage === undefined) {
+    projectsStorage = []
+  } else {
+    projectsStorage = JSON.parse(projectsStorage)
+  }
+  let allProjects = projects.concat(projectsStorage)
+
+  projectsRetrieved = allProjects.filter(project => {
     if (project.title.includes(text) && !project.isPrivate) {
       return project
     }
