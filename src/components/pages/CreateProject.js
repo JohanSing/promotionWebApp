@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import Template from '../templates/ClientTemplate'
 import Input from '../atoms/Input'
 import Select from '../atoms/Select'
@@ -63,6 +64,7 @@ const CreateProject = () => {
   const form = useSelector(state => state.createPage.createPageForm)
   const projectRegistered = useSelector(state => state.createPage.IsRegistered)
   const [errorMessage, setErrorMessage] = useState('')
+  const history = useHistory()
   let successSpan = null
   const getProjectInformation = event => {
     let projectName = event.target.options[event.target.selectedIndex].value
@@ -75,11 +77,16 @@ const CreateProject = () => {
   }, [dispatch])
 
   if (projectRegistered) {
-    setTimeout(() => console.log('je passe'), 3000)
+    setTimeout(() => {
+      history.push(`/`)
+    }, 3000)
     successSpan = (
-      <SuccessMessageSpan>{t('successRegistered')}</SuccessMessageSpan>
+      <SuccessMessageSpan>
+        {t('createPage.form.successRegistered')}
+      </SuccessMessageSpan>
     )
   }
+
   const registerProject = () => {
     let emptyFieldFound = false
     Object.keys(form).forEach(value => {
@@ -154,6 +161,7 @@ const CreateProject = () => {
           <Input
             labelName={t('createPage.form.nbIssue')}
             defaultValue={form.nbIssues}
+            inputColor={themeState.colors.btnBorderPrimary}
             onChange={event => (form.nbIssues = event.target.value)}
           />
           <Input

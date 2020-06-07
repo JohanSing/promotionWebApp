@@ -101,7 +101,6 @@ export const getGithubRepository = (
         })
     })
     .then(() => {
-      console.log(templateForm)
       dispatch(getGithubProject(templateForm))
     })
 }

@@ -49,13 +49,16 @@ const registerProject = project => {
   }
   let allProjects = projects.concat(projectsStorage)
   let maxId =
-    allProjects.reduce((projectFound, pro) => {
-      if (pro.id < projectFound.id) {
-        return projectFound
+    allProjects.reduce((accumulator, currentValue) => {
+      console.log(accumulator, currentValue)
+      if (accumulator.id < currentValue.id) {
+        return currentValue
       }
     }).id + 1
   project.id = maxId
-  project.userId = JSON.parse(localStorage.getItem('security_access')).userId
+  project.userId = JSON.parse(
+    localStorage.getItem('security_access')
+  ).user.providerData[0].uid
   projectsStorage.push(project)
   localStorage.setItem('projects', JSON.stringify(projectsStorage))
 }

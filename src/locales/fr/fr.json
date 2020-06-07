@@ -19,7 +19,8 @@
         "toggleOff":"Public",
         "licence":"Licence",
         "confirmButton":"Créez votre projet",
-        "errorMessage":"Vous avez omis un champs dans le formulaire"
+        "errorMessage":"Vous avez omis un champs dans le formulaire",
+        "successRegistered":"Projet enregistré"
       }
     },
     "cardLink":"Lire la suite >",

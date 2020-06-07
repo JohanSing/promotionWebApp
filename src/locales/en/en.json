@@ -18,7 +18,8 @@
         "toggleOff":"Public",
         "licence":"Licence",
         "confirmButton":"Create your project",
-        "errorMessage":"You have omitted a field in the form"
+        "errorMessage":"You have omitted a field in the form",
+        "successRegistered":"Project successfully registered"
       }
     },
     "cardLink":"Read",
