@@ -4,15 +4,16 @@ import styled from 'styled-components'
 
 const IconTextContainer = styled.div`
   margin-top: 0.5em;
+  color: ${props => props.fontColor};
   svg {
     margin-right: 1em;
-    color: ${props => props.iconColor};
+    color: ${props => props.fontColor};
   }
 `
 
 const CardIconTextContainer = ({ color = 'black', ...props }) => {
   return (
-    <IconTextContainer iconColor={color} props>
+    <IconTextContainer fontColor={props.fontColor} iconColor={color} props>
       {props.children}
     </IconTextContainer>
   )
