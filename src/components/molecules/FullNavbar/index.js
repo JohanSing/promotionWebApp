@@ -50,13 +50,22 @@ const FullNavbar = ({ theme, authUser }) => {
       setIcon(FaTimes)
     }
   }
-  let navCreateProject = null
+  let navCreateProject = null,
+    navbarItemUserProjects = null
   if (window.navigator.onLine && IsConnected()) {
     navCreateProject = (
       <NavbarItemLink
         name={t('newProject')}
         isActive={true}
         link='/projects/create'
+        colorFont={theme.colors.fontMain}
+      />
+    )
+    navbarItemUserProjects = (
+      <NavbarItemLink
+        name={t('newProject')}
+        isActive={true}
+        link='/user/projects'
         colorFont={theme.colors.fontMain}
       />
     )
@@ -96,6 +105,7 @@ const FullNavbar = ({ theme, authUser }) => {
           colorFont={theme.colors.fontMain}
         />
         {navCreateProject}
+        {navbarItemUserProjects}
         <NavbarItemLink
           name={t('newPost')}
           isActive={true}
