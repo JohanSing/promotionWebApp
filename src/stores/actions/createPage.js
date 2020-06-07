@@ -70,7 +70,8 @@ export const getGithubRepository = (
       templateForm.description =
         project.description === null ? '' : project.description
       templateForm.lastRelease = moment(project.pushed_at).format('YYYY-MM-DD')
-      templateForm.license = project.license === null ? '' : project.license
+      templateForm.license =
+        project.license === null ? '' : project.license.name
     })
     .then(() => {
       axios

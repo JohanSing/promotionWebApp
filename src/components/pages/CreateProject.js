@@ -61,7 +61,6 @@ const CreateProject = () => {
   const listProjects = useSelector(state => state.createPage.listProjects)
   const projectsOwner = useSelector(state => state.createPage.projectsOwner)
   const form = useSelector(state => state.createPage.createPageForm)
-  const [finalForm, setFinalForm] = useState(form)
   const projectRegistered = useSelector(state => state.createPage.IsRegistered)
   const [errorMessage, setErrorMessage] = useState('')
   let successSpan = null
@@ -73,7 +72,7 @@ const CreateProject = () => {
   useEffect(() => {
     dispatch(getGithubRepositories())
     dispatch(getCategories())
-  }, [dispatch, finalForm])
+  }, [dispatch])
 
   if (projectRegistered) {
     setTimeout(() => console.log('je passe'), 3000)
@@ -124,51 +123,54 @@ const CreateProject = () => {
           inputColor={themeState.colors.btnBorderPrimary}
           type='text'
           labelName={t('createPage.form.title')}
-          value={form.title}
-          onChange={event =>
-            setFinalForm({ ...form, title: event.target.value })
-          }
+          defaultValue={form.title}
+          onChange={event => {
+            form.title = event.target.value
+          }}
         />
         <Textarea
           inputColor={themeState.colors.btnBorderPrimary}
           name='author-surnname'
           id='description'
-          value={form.description}
+          defaultValue={form.description}
           inputName={t('createPage.form.description')}
+          onChange={event => (form.description = event.target.value)}
         ></Textarea>
         <Input
           inputColor={themeState.colors.btnBorderPrimary}
           type='text'
           labelName={t('createPage.form.licence')}
-          onChange={event => {}}
+          defaultValue={form.license}
+          onChange={event => (form.license = event.target.value)}
         />
         <Input
           inputColor={themeState.colors.btnBorderPrimary}
           type='date'
           labelName={t('createPage.form.last_release')}
           value={form.lastRelease}
+          onChange={event => (form.lastRelease = event.target.value)}
         />
         <SectionStatsContainer mediumScreen={themeState.sizes.tablet}>
           <Input
-            inputColor={themeState.colors.btnBorderPrimary}
-            type='number'
-            min='0'
             labelName={t('createPage.form.nbIssue')}
-            value={form.nbIssues}
+            defaultValue={form.nbIssues}
+            onChange={event => (form.nbIssues = event.target.value)}
           />
           <Input
             inputColor={themeState.colors.btnBorderPrimary}
             type='number'
             min='0'
             labelName={t('createPage.form.nbContributor')}
-            value={form.nbContributors}
+            defaultValue={form.nbContributors}
+            onChange={event => (form.nbContributors = event.target.value)}
           />
           <Input
             inputColor={themeState.colors.btnBorderPrimary}
             type='number'
             min='0'
             labelName={t('createPage.form.nbRelease')}
-            value={form.nbReleases}
+            defaultValue={form.nbReleases}
+            onChange={event => (form.nbReleases = event.target.value)}
           />
         </SectionStatsContainer>
         <CategoryContainer>
@@ -178,6 +180,7 @@ const CreateProject = () => {
             required
             action={event => {
               let select = event.target
+              form.categoryId = select[select.selectedIndex].value
             }}
           >
             <option value='' disabled selected></option>
@@ -194,7 +197,9 @@ const CreateProject = () => {
             nameOn={t('createPage.form.toggleOn')}
             inputName='checkbox'
             color={themeState.colors.btnBorderPrimary}
-            action={event => {}}
+            action={event => {
+              form.isPrivate = event.target.checked
+            }}
           />
         </CategoryContainer>
         {successSpan}
