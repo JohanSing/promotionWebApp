@@ -26,6 +26,18 @@
     "cardLink":"Read",
     "search":"Search",
     "langEn": "English",
-    "langFr": "French"
+    "langFr": "French",
+    "title": "Title",
+    "post": {
+      "type": {
+        "news": "News",
+        "changelog": "Changelog"
+      },
+      "titlePage": "Create a post for your project",
+      "titlePreview": "Preview your post",
+      "titleForm": "Fill in your details",
+      "submit": "Create your post",
+      "errorMessage": "All fields are required."
+    }
   }
 }

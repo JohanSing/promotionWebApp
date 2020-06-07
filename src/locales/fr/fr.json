@@ -26,6 +26,18 @@
     },
     "cardLink":"Lire la suite >",
     "langEn": "Anglais",
-    "langFr": "Français"
+    "langFr": "Français",
+    "title": "Titre",
+    "post": {
+      "type": {
+        "news": "Annonce",
+        "changelog": "Version"
+      },
+      "titlePage": "Créer une annonce pour votre projet",
+      "titlePreview": "Pré-visualiser votre annonce",
+      "titleForm": "Renseigner les détails de votre post",
+      "submit": "Créer votre annonce",
+      "errorMessage": "Tous les champs sont requis."
+    }
   }
 }
