@@ -8,7 +8,6 @@ import moment from 'moment'
 import Template from '../templates/ClientTemplate'
 import Card from '../molecules/Card'
 import projects from '../../datas/projects.json'
-import posts from '../../datas/posts.json'
 import categories from '../../datas/categories.json'
 
 const Home = () => {
@@ -23,7 +22,7 @@ const Home = () => {
       return project
     })
 
-    postsRetrieved = posts.filter(post => {
+    postsRetrieved = JSON.parse(localStorage.getItem('posts')).filter(post => {
       return post
     })
 
@@ -35,9 +34,7 @@ const Home = () => {
       })[0]
 
       project.category = category.name
-      project.created_at = moment(project.createdAt).format(
-        'YYYY-MM-DD HH:mm:ss'
-      )
+      project.created_at = moment(project.createdAt).format('YYYY-MM-DD')
 
       return project
     })
@@ -50,7 +47,7 @@ const Home = () => {
   }, [])
 
   return (
-    <Template colorBackground={themeState.colors.backgroundMain}>
+    <Template>
       <HomeContainer>
         <ItemsContainer
           mediumScreen={themeState.sizes.tablet}
@@ -67,7 +64,7 @@ const Home = () => {
                 title={value.title}
                 category={value.category}
                 description={value.description}
-                date={value.created_at}
+                date={value.createdAt}
                 type={value.type}
                 link='#'
                 linkName={t('cardLink')}

@@ -109,7 +109,7 @@ const FullNavbar = ({ theme, authUser }) => {
         <NavbarItemLink
           name={t('newPost')}
           isActive={true}
-          link='/'
+          link='/posts/create'
           colorFont={theme.colors.fontMain}
         />
         <NavbarItemLink
