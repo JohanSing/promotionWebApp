@@ -63,7 +63,7 @@ const FullNavbar = ({ theme, authUser }) => {
     )
     navbarItemUserProjects = (
       <NavbarItemLink
-        name={t('newProject')}
+        name={t('userProjects')}
         isActive={true}
         link='/user/projects'
         colorFont={theme.colors.fontMain}
