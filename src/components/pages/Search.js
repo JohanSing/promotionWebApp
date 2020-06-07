@@ -36,6 +36,7 @@ const Search = () => {
               <Card
                 key={index}
                 color={themeState.colors.btnBackgroundPrimaryHover}
+                fontColor={themeState.colors.fontMain}
                 title={value.title}
                 category={value.category}
                 description={value.description}

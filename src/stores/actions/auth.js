@@ -27,7 +27,6 @@ export const signInWithGithub = () => async dispatch => {
       console.log(err)
     }
   }
-
   const authUser = {
     access_token: response.credential.accessToken,
     user: response.user

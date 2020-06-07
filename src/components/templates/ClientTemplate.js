@@ -13,7 +13,7 @@ const ClientTemplate = props => {
 
   useEffect(() => {
     dispatch(retrieveAuth())
-  }, [])
+  }, [dispatch])
 
   return (
     <Template colorBackground={props.colorBackground}>

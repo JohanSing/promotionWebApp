@@ -17,6 +17,11 @@ import Toggle from '../../atoms/Toggle'
 import LoginComponent from '../LoginComponent'
 import IconEmojiLang from '../../atoms/IconItem/IconEmojiLang'
 
+const IsConnected = () => {
+  let acccessToken = JSON.parse(localStorage.getItem('security_access'))
+  return acccessToken !== null && acccessToken !== undefined
+}
+
 const FullNavbar = ({ theme, authUser }) => {
   const { t, i18n } = useTranslation()
   const dispatch = useDispatch()
@@ -45,7 +50,17 @@ const FullNavbar = ({ theme, authUser }) => {
       setIcon(FaTimes)
     }
   }
-
+  let navCreateProject = null
+  if (window.navigator.onLine && IsConnected()) {
+    navCreateProject = (
+      <NavbarItemLink
+        name={t('newProject')}
+        isActive={true}
+        link='/projects/create'
+        colorFont={theme.colors.fontMain}
+      />
+    )
+  }
   return (
     <Navbar colorBackground={theme.colors.backgroundMain}>
       <TopBar>
@@ -80,12 +95,7 @@ const FullNavbar = ({ theme, authUser }) => {
           link='/'
           colorFont={theme.colors.fontMain}
         />
-        <NavbarItemLink
-          name={t('newProject')}
-          isActive={true}
-          link='/'
-          colorFont={theme.colors.fontMain}
-        />
+        {navCreateProject}
         <NavbarItemLink
           name={t('newPost')}
           isActive={true}
