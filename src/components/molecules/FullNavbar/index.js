@@ -51,7 +51,8 @@ const FullNavbar = ({ theme, authUser }) => {
     }
   }
   let navCreateProject = null,
-    navbarItemUserProjects = null
+    navbarItemUserProjects = null,
+    navbarCreatePost
   if (window.navigator.onLine && IsConnected()) {
     navCreateProject = (
       <NavbarItemLink
@@ -66,6 +67,14 @@ const FullNavbar = ({ theme, authUser }) => {
         name={t('userProjects')}
         isActive={true}
         link='/user/projects'
+        colorFont={theme.colors.fontMain}
+      />
+    )
+    navbarCreatePost = (
+      <NavbarItemLink
+        name={t('newPost')}
+        isActive={true}
+        link='/posts/create'
         colorFont={theme.colors.fontMain}
       />
     )
@@ -104,14 +113,9 @@ const FullNavbar = ({ theme, authUser }) => {
           link='/'
           colorFont={theme.colors.fontMain}
         />
-        {navCreateProject}
         {navbarItemUserProjects}
-        <NavbarItemLink
-          name={t('newPost')}
-          isActive={true}
-          link='/posts/create'
-          colorFont={theme.colors.fontMain}
-        />
+        {navCreateProject}
+        {navbarCreatePost}
         <NavbarItemLink
           name={t('search')}
           isActive={true}
