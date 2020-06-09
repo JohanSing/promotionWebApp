@@ -8,12 +8,12 @@ import moment from 'moment'
 import Template from '../templates/ClientTemplate'
 import Card from '../molecules/Card'
 import projects from '../../datas/projects.json'
-import posts from '../../datas/posts.json'
 import categories from '../../datas/categories.json'
 
 const Home = () => {
   const { t } = useTranslation()
   const themeState = useSelector(state => state.global.theme)
+  const posts = useSelector(state => state.post.posts)
   const [items, setItems] = useState([])
 
   const retrievePostsAndProjects = () => {
@@ -35,9 +35,6 @@ const Home = () => {
       })[0]
 
       project.category = category.name
-      project.created_at = moment(project.createdAt).format(
-        'YYYY-MM-DD HH:mm:ss'
-      )
 
       return project
     })
@@ -47,10 +44,10 @@ const Home = () => {
 
   useEffect(() => {
     setItems(retrievePostsAndProjects())
-  }, [])
+  }, [posts])
 
   return (
-    <Template colorBackground={themeState.colors.backgroundMain}>
+    <Template>
       <HomeContainer>
         <ItemsContainer
           mediumScreen={themeState.sizes.tablet}
@@ -62,12 +59,16 @@ const Home = () => {
             return (
               <Card
                 key={index}
-                color={themeState.colors.btnBackgroundPrimaryHover}
+                color={
+                  value.type
+                    ? themeState.colors.btnBackgroundSecondaryHover
+                    : themeState.colors.btnBackgroundPrimaryHover
+                }
                 fontColor={themeState.colors.fontMain}
                 title={value.title}
                 category={value.category}
                 description={value.description}
-                date={value.created_at}
+                date={moment(value.createdAt).format('L')}
                 type={value.type}
                 link='#'
                 linkName={t('cardLink')}

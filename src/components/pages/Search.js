@@ -15,7 +15,7 @@ const Search = () => {
   const dispatch = useDispatch()
 
   return (
-    <Template colorBackground={themeState.colors.backgroundMain}>
+    <Template>
       <SearchContainer>
         <div>
           <Input
@@ -55,7 +55,7 @@ const Search = () => {
 }
 const SearchContainer = styled.div`
   display: flex;
-  padding: 4em;
+  padding: 1em 4em;
   justify-content: space-between;
   flex-direction: column;
 `

@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import Proptypes from 'prop-types';
+import React from 'react'
+import styled from 'styled-components'
+import Proptypes from 'prop-types'
 
 const Button = ({
   name,
@@ -8,7 +8,9 @@ const Button = ({
   fillingColor,
   textColor,
   textHoverColor,
+  backgroundColor,
   IsInvert,
+  type,
   ...props
 }) => {
   return (
@@ -19,18 +21,20 @@ const Button = ({
         textColor={textColor}
         fillingColor={fillingColor}
         borderColor={borderColor}
+        backgroundColor={backgroundColor}
+        type={type}
         {...props}
       >
         {name}
       </ButtonComponent>
     </ButtonContainer>
-  );
-};
+  )
+}
 const ButtonComponent = styled.button`
   background-color: ${props =>
-    props.IsInvert ? 'white' : props.fillingColor };
+    props.IsInvert ? props.backgroundColor : props.fillingColor};
   border: none;
-  color: ${props => props.IsInvert ? props.textHoverColor : props.textColor};
+  color: ${props => (props.IsInvert ? props.textHoverColor : props.textColor)};
   padding: 16px 32px;
   text-align: center;
   text-decoration: none;
@@ -42,12 +46,12 @@ const ButtonComponent = styled.button`
   border: 2px solid ${props => props.borderColor};
   &:hover {
     background-color: ${props =>
-      props.IsInvert ? props.fillingColor: 'white'};
+      props.IsInvert ? props.fillingColor : props.backgroundColor};
     color: ${props =>
       props.IsInvert ? props.textColor : props.textHoverColor};
   }
-`;
-const ButtonContainer = styled.div``;
+`
+const ButtonContainer = styled.div``
 
 Button.defaultProps = {
   name: '',
@@ -55,8 +59,10 @@ Button.defaultProps = {
   fillingColor: 'black',
   textHoverColor: 'black',
   textColor: 'white',
+  backgroundColor: 'white',
+  type: 'button',
   IsInvert: false
-};
+}
 
 Button.propTypes = {
   name: Proptypes.string,
@@ -64,7 +70,9 @@ Button.propTypes = {
   fillingColor: Proptypes.string,
   textHoverColor: Proptypes.string,
   textColor: Proptypes.string,
+  backgroundColor: Proptypes.string,
+  type: Proptypes.string,
   IsInvert: Proptypes.bool
-};
+}
 
-export default Button;
+export default Button
