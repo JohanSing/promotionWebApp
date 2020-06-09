@@ -107,12 +107,6 @@ const FullNavbar = ({ theme, authUser }) => {
         isActive={isNavbarActive}
         colorBackground={theme.colors.backgroundMain}
       >
-        <NavbarItemLink
-          name={t('categories')}
-          isActive={true}
-          link='/'
-          colorFont={theme.colors.fontMain}
-        />
         {navbarItemUserProjects}
         {navCreateProject}
         {navbarCreatePost}
