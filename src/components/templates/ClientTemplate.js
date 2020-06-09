@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { retrieveAuth } from '../../stores/actions/auth'
-import { getPosts } from '../../stores/actions/post'
+import { initPosts, getPosts } from '../../stores/actions/post'
 
 import Navbar from '../molecules/FullNavbar'
 
@@ -14,7 +14,12 @@ const ClientTemplate = props => {
 
   useEffect(() => {
     dispatch(retrieveAuth())
-    dispatch(getPosts())
+
+    if (localStorage.getItem('posts')) {
+      dispatch(getPosts())
+    } else {
+      dispatch(initPosts())
+    }
   }, [dispatch])
 
   return (

@@ -1,13 +1,14 @@
+import posts from '../../datas/posts.json'
+
 export const GET_POSTS = 'GET_POSTS'
-export const CREATE_POST = 'CREATE_POST'
+
+export const initPosts = () => dispatch => {
+  localStorage.setItem('posts', JSON.stringify(posts))
+  dispatch(getPosts())
+}
 
 export const getPosts = () => ({
   type: GET_POSTS
-})
-
-export const createPost = payload => ({
-  type: CREATE_POST,
-  payload: payload
 })
 
 export const addNewPost = payload => dispatch => {
@@ -17,5 +18,5 @@ export const addNewPost = payload => dispatch => {
 
   localStorage.setItem('posts', JSON.stringify(posts))
 
-  dispatch(createPost(payload))
+  dispatch(getPosts())
 }

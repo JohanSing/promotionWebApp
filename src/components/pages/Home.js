@@ -13,6 +13,7 @@ import categories from '../../datas/categories.json'
 const Home = () => {
   const { t } = useTranslation()
   const themeState = useSelector(state => state.global.theme)
+  const posts = useSelector(state => state.post.posts)
   const [items, setItems] = useState([])
 
   const retrievePostsAndProjects = () => {
@@ -22,7 +23,7 @@ const Home = () => {
       return project
     })
 
-    postsRetrieved = JSON.parse(localStorage.getItem('posts')).filter(post => {
+    postsRetrieved = posts.filter(post => {
       return post
     })
 
@@ -34,7 +35,6 @@ const Home = () => {
       })[0]
 
       project.category = category.name
-      project.created_at = moment(project.createdAt).format('YYYY-MM-DD')
 
       return project
     })
@@ -44,7 +44,7 @@ const Home = () => {
 
   useEffect(() => {
     setItems(retrievePostsAndProjects())
-  }, [])
+  }, [posts])
 
   return (
     <Template>
@@ -59,12 +59,16 @@ const Home = () => {
             return (
               <Card
                 key={index}
-                color={themeState.colors.btnBackgroundPrimaryHover}
+                color={
+                  value.type
+                    ? themeState.colors.btnBackgroundSecondaryHover
+                    : themeState.colors.btnBackgroundPrimaryHover
+                }
                 fontColor={themeState.colors.fontMain}
                 title={value.title}
                 category={value.category}
                 description={value.description}
-                date={value.createdAt}
+                date={moment(value.createdAt).format('L')}
                 type={value.type}
                 link='#'
                 linkName={t('cardLink')}

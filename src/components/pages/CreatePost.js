@@ -72,7 +72,9 @@ const CreatePost = () => {
             fontColor={themeState.colors.fontMain}
             title={formState.title}
             description={formState.description}
-            date={moment(new Date()).format('YYYY-MM-DD HH:mm:ss')}
+            date={moment(new Date().toISOString()).format(
+              'YYYY-MM-DD HH:mm:ss'
+            )}
             type={formState.type}
             linkName={t('cardLink')}
           />
